@@ -24,9 +24,6 @@ import {
   Zap,
   Instagram,
   PackageCheck,
-  Settings,
-  Link as LinkIcon,
-  Save,
   RotateCcw
 } from 'lucide-react';
 
@@ -44,11 +41,6 @@ const SHOPIER_LINKS = {
 
 const INSTAGRAM_URL = 'https://www.instagram.com/frestin_perfumes/';
 
-// ==========================================
-// STOKLU ÜRÜNLER ÖZEL SHOPIER LİNK YAPILANDIRMASI
-// ==========================================
-const STOCK_CONFIG_STORAGE_KEY = 'frestin_stock_config_v2';
-
 const INITIAL_CATALOG = [
   {
     id: 'frestin-101',
@@ -58,9 +50,9 @@ const INITIAL_CATALOG = [
     fragranticaRef: 'Parfums de Marly Althaïr',
     gender: 'Unisex',
     inStock: true,
-    stockCount: 8,
-    shopierLink50: '',
-    shopierLink100: '',
+    stockCount: 5,
+    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
+    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
     bottleColor: '#7C1D1D',
     liquidColor: '#F0D4A3',
     rating: 4.9,
@@ -84,9 +76,9 @@ const INITIAL_CATALOG = [
     fragranticaRef: 'Acqua di Giò Profondo & Fresh Series',
     gender: 'Erkek',
     inStock: true,
-    stockCount: 12,
-    shopierLink50: '',
-    shopierLink100: '',
+    stockCount: 4,
+    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
+    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
     bottleColor: '#1E293B',
     liquidColor: '#DCE7EB',
     rating: 4.8,
@@ -110,9 +102,9 @@ const INITIAL_CATALOG = [
     fragranticaRef: 'Baccarat Rouge 540 Inspiration',
     gender: 'Unisex',
     inStock: true,
-    stockCount: 5,
-    shopierLink50: '',
-    shopierLink100: '',
+    stockCount: 6,
+    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
+    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
     bottleColor: '#6E1E26',
     liquidColor: '#F2D4A3',
     rating: 5.0,
@@ -136,9 +128,9 @@ const INITIAL_CATALOG = [
     fragranticaRef: 'Alien & Profondo Mix',
     gender: 'Kadın',
     inStock: true,
-    stockCount: 7,
-    shopierLink50: '',
-    shopierLink100: '',
+    stockCount: 3,
+    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
+    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
     bottleColor: '#1F242D',
     liquidColor: '#F7E6D0',
     rating: 4.9,
@@ -267,30 +259,7 @@ const RealFrestinBottleCardSVG = ({ labelColor = '#6E1E26', borderColor = '#D5B0
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
 
-  const [catalog, setCatalog] = useState(() => {
-    try {
-      const savedConfig = localStorage.getItem(STOCK_CONFIG_STORAGE_KEY);
-      if (savedConfig) {
-        const parsed = JSON.parse(savedConfig);
-        return INITIAL_CATALOG.map((item) => (parsed[item.id] ? { ...item, ...parsed[item.id] } : item));
-      }
-    } catch (e) {}
-    return INITIAL_CATALOG;
-  });
-
-  // ==========================================
-  // CANLI SHOPIER STOK SENKRONİZASYONU STATE'LERİ
-  // ==========================================
-  const [isSyncingShopier, setIsSyncingShopier] = useState(false);
-  const [lastShopierSync, setLastShopierSync] = useState(null);
-  const [shopierSyncStatus, setShopierSyncStatus] = useState('idle'); // 'idle' | 'success' | 'fallback'
-  const [shopierTokenInput, setShopierTokenInput] = useState(() => {
-    try {
-      return localStorage.getItem('frestin_shopier_pat') || '';
-    } catch (e) {
-      return '';
-    }
-  });
+  const [catalog] = useState(INITIAL_CATALOG);
 
   const [selectedRefIds, setSelectedRefIds] = useState(['frestin-101', 'frestin-102']);
   const [refSearchQuery, setRefSearchQuery] = useState('');
@@ -298,278 +267,19 @@ export default function App() {
   const [dislikedNotes, setDislikedNotes] = useState([]);
   const [noteSelectionMode, setNoteSelectionMode] = useState('like');
 
-  const [storeFilter, setStoreFilter] = useState('Tümü');
-  const [storeSearch, setStoreSearch] = useState('');
   const [selectedSizes, setSelectedSizes] = useState({});
   const [detailModalProduct, setDetailModalProduct] = useState(null);
-
-  const [isStockManagerOpen, setIsStockManagerOpen] = useState(false);
-  const [newStockPerfumeForm, setNewStockPerfumeForm] = useState({
-    name: '',
-    fragranticaRef: '',
-    subtitle: '',
-    gender: 'Unisex',
-    stockCount: 5,
-    shopierLink50: '',
-    shopierLink100: ''
-  });
 
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
   const [shopierRedirectModal, setShopierRedirectModal] = useState(null);
 
-  const estimatedShipDate = useMemo(() => getEstimatedShippingDate(), []);
-
-  // ==========================================
-  // SHOPIER CANLI STOK ÇEKME FONKSİYONU
-  // ==========================================
-  const syncFromShopier = async (silent = false) => {
-    setIsSyncingShopier(true);
-    try {
-      let fetchedProducts = [];
-
-      // 1. YÖNTEM: Vercel Serverless Endpoint (/api/shopier) veya girilen API Token ile Resmi Shopier API
-      try {
-        const apiHeaders = { Accept: 'application/json' };
-        if (shopierTokenInput.trim()) {
-          apiHeaders['Authorization'] = `Bearer ${shopierTokenInput.trim()}`;
-        }
-
-        const apiRes = await fetch('/api/shopier', { headers: apiHeaders });
-        if (apiRes.ok) {
-          const data = await apiRes.json();
-          if (Array.isArray(data.products) && data.products.length > 0) {
-            fetchedProducts = data.products;
-          }
-        } else if (shopierTokenInput.trim()) {
-          // Doğrudan Shopier API v1 denemesi
-          const directRes = await fetch('https://api.shopier.com/v1/products?limit=50', {
-            headers: {
-              Authorization: `Bearer ${shopierTokenInput.trim()}`,
-              Accept: 'application/json'
-            }
-          });
-          if (directRes.ok) {
-            const directData = await directRes.json();
-            if (Array.isArray(directData)) {
-              fetchedProducts = directData.map((p) => ({
-                id: `shopier-${p.id}`,
-                title: p.title,
-                price: Number(p.priceData?.price || p.price || PRICE_50ML),
-                stockCount: Number(p.stockQuantity ?? p.stock ?? 1),
-                inStock: Number(p.stockQuantity ?? p.stock ?? 1) > 0 && p.stockStatus !== 'outOfStock',
-                url: p.url || `https://www.shopier.com/frestinperfumes/${p.id}`
-              }));
-            }
-          }
-        }
-      } catch (innerErr) {
-        // API henüz kurulmadıysa vitrin tarayıcısına geç
-      }
-
-      // 2. YÖNTEM: Shopier Mağaza Vitrini (shopier.com/frestinperfumes) Üzerinden Canlı Tarama
-      if (fetchedProducts.length === 0) {
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(SHOPIER_LINKS.store)}`;
-        const res = await fetch(proxyUrl);
-        if (res.ok) {
-          const json = await res.json();
-          const html = json.contents || '';
-          if (html) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const productLinks = Array.from(doc.querySelectorAll('a[href*="shopier.com"]'));
-            const discoveredMap = new Map();
-
-            productLinks.forEach((a) => {
-              const href = a.getAttribute('href') || '';
-              const match = href.match(/\/(\d{6,12})/);
-              if (match) {
-                const prodId = match[1];
-                // Genel 50ml ve 100ml sabit sipariş linklerini hariç tutabilir veya dahil edebiliriz
-                const cardText = (a.closest('div')?.textContent || a.textContent || '').trim();
-                const titleEl = a.querySelector('h2, h3, h4, .product-title, .title') || a;
-                const cleanTitle = (titleEl.textContent || '').replace(/\s+/g, ' ').trim();
-                const isSoldOut = /tükendi|stokta yok|sold out/i.test(cardText);
-
-                if (cleanTitle && cleanTitle.length > 2 && !discoveredMap.has(prodId)) {
-                  discoveredMap.set(prodId, {
-                    id: `shopier-${prodId}`,
-                    shopierId: prodId,
-                    title: cleanTitle,
-                    url: href.startsWith('http') ? href : `https://www.shopier.com${href}`,
-                    inStock: !isSoldOut,
-                    stockCount: isSoldOut ? 0 : 5
-                  });
-                }
-              }
-            });
-
-            if (discoveredMap.size > 0) {
-              fetchedProducts = Array.from(discoveredMap.values());
-            }
-          }
-        }
-      }
-
-      // 3. Katalog ile Eşleştirme ve Yeni Stoklu Ürünleri Ekleme
-      if (fetchedProducts.length > 0) {
-        setCatalog((prevCatalog) => {
-          const updatedCatalog = prevCatalog.map((item) => {
-            const matched = fetchedProducts.find(
-              (fp) =>
-                fp.title.toLowerCase().includes(item.name.toLowerCase().replace('frestin ', '')) ||
-                (item.shopierLink50 && item.shopierLink50.includes(fp.shopierId)) ||
-                (item.shopierLink100 && item.shopierLink100.includes(fp.shopierId))
-            );
-            if (matched) {
-              return {
-                ...item,
-                inStock: matched.inStock,
-                stockCount: matched.stockCount,
-                shopierLink50: item.shopierLink50 || matched.url
-              };
-            }
-            return item;
-          });
-
-          // Shopier'e yeni eklenmiş ama katalogda olmayan stoklu parfümleri otomatik ekle
-          fetchedProducts.forEach((fp) => {
-            if (fp.shopierId === '52434473' || fp.shopierId === '52434538') return; // Genel 50ml/100ml linklerini atla
-            const exists = updatedCatalog.some(
-              (item) =>
-                fp.title.toLowerCase().includes(item.name.toLowerCase().replace('frestin ', '')) ||
-                item.id === fp.id
-            );
-            if (!exists) {
-              updatedCatalog.unshift({
-                id: fp.id,
-                code: `S-${fp.shopierId ? fp.shopierId.slice(-3) : updatedCatalog.length + 1}`,
-                name: fp.title.startsWith('Frestin') ? fp.title : `Frestin ${fp.title}`,
-                subtitle: 'Shopier Canlı Stok • Extrait de Parfum',
-                fragranticaRef: 'Shopier Mağaza Ürünü',
-                gender: 'Unisex',
-                inStock: fp.inStock,
-                stockCount: fp.stockCount ?? 5,
-                shopierLink50: fp.url,
-                shopierLink100: fp.url,
-                bottleColor: '#4A7C59',
-                liquidColor: '#F0D4A3',
-                rating: 5.0,
-                reviewsCount: 12,
-                matchPercent: 98,
-                notes: [{ name: 'Extrait Esans', percent: 95, color: '#E9C46A' }],
-                pyramid: {
-                  top: ['Özel Seçki Üst Notalar'],
-                  heart: ['Yoğun Kalp Notalar'],
-                  base: ['Kalıcı Dip Notalar']
-                }
-              });
-            }
-          });
-
-          return updatedCatalog;
-        });
-
-        setShopierSyncStatus('success');
-        setLastShopierSync(new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }));
-        if (!silent) {
-          setToastMessage(`Shopier mağazanızdan güncel stoklar çekildi! (${fetchedProducts.length} kayıt)`);
-          setTimeout(() => setToastMessage(null), 3500);
-        }
-      } else {
-        setShopierSyncStatus('fallback');
-        setLastShopierSync(new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }));
-        if (!silent) {
-          setToastMessage('Shopier bağlantısı kontrol edildi, mevcut stok listesi güncel.');
-          setTimeout(() => setToastMessage(null), 3500);
-        }
-      }
-    } catch (err) {
-      setShopierSyncStatus('fallback');
-      if (!silent) {
-        setToastMessage('Shopier senkronizasyonu tamamlandı (Yerel önbellek aktif).');
-        setTimeout(() => setToastMessage(null), 3000);
-      }
-    } finally {
-      setIsSyncingShopier(false);
-    }
-  };
-
-  // Site ilk açıldığında ve her 3 dakikada bir Shopier stoğunu otomatik kontrol et
-  useEffect(() => {
-    syncFromShopier(true);
-    const interval = setInterval(() => {
-      syncFromShopier(true);
-    }, 180000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const updateStockConfig = (id, newProps) => {
-    const updated = catalog.map((item) => (item.id === id ? { ...item, ...newProps } : item));
-    setCatalog(updated);
-    try {
-      const toSave = {};
-      updated.forEach((i) => {
-        toSave[i.id] = {
-          inStock: i.inStock,
-          stockCount: i.stockCount,
-          shopierLink50: i.shopierLink50,
-          shopierLink100: i.shopierLink100
-        };
-      });
-      localStorage.setItem(STOCK_CONFIG_STORAGE_KEY, JSON.stringify(toSave));
-    } catch (e) {}
-    setToastMessage('Stok ve Shopier link ayarları güncellendi!');
-    setTimeout(() => setToastMessage(null), 3000);
-  };
-
-  const handleAddNewStockPerfume = (e) => {
-    e.preventDefault();
-    if (!newStockPerfumeForm.name.trim()) return;
-    const newItem = {
-      id: `frestin-custom-${Date.now()}`,
-      code: `F-${catalog.length + 1}`,
-      name: newStockPerfumeForm.name,
-      subtitle: newStockPerfumeForm.subtitle || 'Özel Seri • Extrait de Parfum',
-      fragranticaRef: newStockPerfumeForm.fragranticaRef || 'Frestin Özel Üretim',
-      gender: newStockPerfumeForm.gender,
-      inStock: true,
-      stockCount: Number(newStockPerfumeForm.stockCount) || 5,
-      shopierLink50: newStockPerfumeForm.shopierLink50,
-      shopierLink100: newStockPerfumeForm.shopierLink100,
-      bottleColor: '#7C1D1D',
-      liquidColor: '#F0D4A3',
-      rating: 5.0,
-      reviewsCount: 1,
-      matchPercent: 99,
-      notes: [{ name: 'Özel Esans', percent: 90, color: '#E9C46A' }],
-      pyramid: {
-        top: ['Narenciye & Baharat'],
-        heart: ['Çiçeksi & Odunsu Notalar'],
-        base: ['Amber & Misk']
-      }
-    };
-    const updated = [newItem, ...catalog];
-    setCatalog(updated);
-    setNewStockPerfumeForm({
-      name: '',
-      fragranticaRef: '',
-      subtitle: '',
-      gender: 'Unisex',
-      stockCount: 5,
-      shopierLink50: '',
-      shopierLink100: ''
-    });
-    setToastMessage('Yeni stoklu parfüm başarıyla eklendi!');
-    setTimeout(() => setToastMessage(null), 3000);
-  };
-
   const getSelectedSize = (productId) => selectedSizes[productId] || '50ml';
   const setSelectedSize = (productId, size) => setSelectedSizes((prev) => ({ ...prev, [productId]: size }));
 
   const addToCart = (product, size) => {
-    const price = size === '100ml' ? PRICE_100ML : PRICE_50ML;
+    const price = product.customPrice || (size === '100ml' ? PRICE_100ML : PRICE_50ML);
     const cartItemId = `${product.id}-${size}`;
     const existing = cart.find((i) => i.cartItemId === cartItemId);
     if (existing) {
@@ -592,8 +302,6 @@ export default function App() {
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.qty, 0), [cart]);
   const cartSubtotal = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.qty, 0), [cart]);
   const cartTotal = cartSubtotal;
-
-  const stockedProducts = useMemo(() => catalog.filter((p) => p.inStock), [catalog]);
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1E1E1C] flex flex-col font-sans selection:bg-[#E6482E] selection:text-white">
@@ -985,70 +693,8 @@ export default function App() {
                 <div className="flex items-center justify-between border-b border-[#E6E0D6] pb-4">
                   <div>
                     <span className="text-xs font-bold text-[#E86F38] uppercase tracking-wider">SİZİN İÇİN ÖZEL ÖNERİLENLER</span>
-                    <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1E1E1C]">Eşleşen Frestin Notaları</h2>
+                    <h2 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Eşleşen Frestin Parfümleri</h2>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-[#FAF7F2] border border-[#E6E0D6] text-xs font-bold text-[#78756E]">
-                    {catalog.length} Sonuç
-                  </span>
-                </div>
-
-                <div className="space-y-6">
-                  {catalog.map((product) => {
-                    const selectedSize = getSelectedSize(product.id);
-                    const finalShopierLink = selectedSize === '100ml' ? (product.shopierLink100 || SHOPIER_LINKS['100ml']) : (product.shopierLink50 || SHOPIER_LINKS['50ml']);
-                    return (
-                      <div key={product.id} className="bg-[#FAF7F2] rounded-3xl p-6 border border-[#E6E0D6] hover:border-[#E86F38] transition-all flex flex-col sm:flex-row gap-6 items-center">
-                        <div className="w-32 shrink-0">
-                          <RealFrestinBottleCardSVG labelColor={product.bottleColor} liquidTint={product.liquidTint} title={product.code} subLabel={product.name.replace('Frestin ', '')} />
-                        </div>
-                        <div className="flex-1 space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className="px-3 py-1 rounded-full bg-[#1E1E1C] text-white text-xs font-bold">
-                              %{product.matchPercent} Eşleşme
-                            </span>
-                            <div className="flex items-center gap-1 text-xs text-[#78756E]">
-                              <Star className="w-3.5 h-3.5 fill-[#E9C46A] text-[#E9C46A]" />
-                              <span className="font-bold text-[#1E1E1C]">{product.rating}</span>
-                              <span>({product.reviewsCount})</span>
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">{product.name}</h3>
-                            <p className="text-xs text-[#78756E] mt-0.5">{product.subtitle} • Ref: {product.fragranticaRef}</p>
-                          </div>
-                          <div className="flex flex-wrap gap-2 pt-1">
-                            {product.notes.map((n, idx) => (
-                              <span key={idx} className="text-[11px] px-2.5 py-1 rounded-lg bg-white border border-[#E6E0D6] font-medium text-[#5A5751]">
-                                {n.name}
-                              </span>
-                            ))}
-                          </div>
-                          <div className="pt-3 border-t border-[#E6E0D6] flex flex-wrap items-center justify-between gap-3">
-                            <div className="flex bg-white p-1 rounded-xl border border-[#E6E0D6]">
-                              <button onClick={() => setSelectedSize(product.id, '50ml')} className={`px-3 py-1 rounded-lg text-xs font-bold ${selectedSize === '50ml' ? 'bg-[#1E1E1C] text-white' : 'text-[#78756E]'}`}>
-                                50ml ({PRICE_50ML} TL)
-                              </button>
-                              <button onClick={() => setSelectedSize(product.id, '100ml')} className={`px-3 py-1 rounded-lg text-xs font-bold ${selectedSize === '100ml' ? 'bg-[#1E1E1C] text-white' : 'text-[#78756E]'}`}>
-                                100ml ({PRICE_100ML} TL)
-                              </button>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              {product.inStock && (
-                                <button onClick={() => setShopierRedirectModal({ product, size: selectedSize, url: finalShopierLink })} className="px-4 py-2.5 rounded-xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center gap-1 shadow-xs">
-                                  <span>Shopier Al</span>
-                                  <ExternalLink className="w-3.5 h-3.5" />
-                                </button>
-                              )}
-                              <button onClick={() => addToCart(product, selectedSize)} className="px-4 py-2.5 rounded-xl bg-[#1E1E1C] hover:bg-[#333] text-white text-xs font-bold flex items-center gap-1">
-                                <ShoppingBag className="w-3.5 h-3.5" />
-                                <span>Sepete Ekle</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
                 </div>
               </div>
             </div>
@@ -1056,274 +702,211 @@ export default function App() {
         </main>
       )}
 
-      {/* ================= STOKLU ÜRÜNLER (HEMEN TESLİM) ================= */}
+      {/* ================= STOKLU ÜRÜNLER (DOĞRUDAN SHOPIER YÖNLENDİRME) ================= */}
       {activeTab === 'instock' && (
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-          <div className="bg-gradient-to-r from-[#3B6447] to-[#4A7C59] text-white rounded-3xl p-6 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-3 max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold">
-                  <Zap className="w-3.5 h-3.5 fill-current text-[#E9C46A]" />
-                  <span>20 GÜN BEKLEMEDEN • 24 SAATTE KARGODA</span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/25 text-white/95 text-[11px] font-semibold">
-                  <span className={`w-2 h-2 rounded-full ${isSyncingShopier ? 'bg-[#E9C46A] animate-ping' : 'bg-[#6EE7B7]'}`} />
-                  <span>
-                    {isSyncingShopier
-                      ? 'Shopier Stoğu Kontrol Ediliyor...'
-                      : `Shopier Canlı Stok Aktif ${lastShopierSync ? `(${lastShopierSync})` : ''}`}
-                  </span>
-                </div>
-              </div>
-              <h1 className="font-serif-luxury text-3xl sm:text-4xl font-bold">Stoklu Ürünlerimiz (Hemen Teslim)</h1>
-              <p className="text-xs sm:text-sm text-white/90 leading-relaxed">
-                Bu sayfadaki ürünler doğrudan Shopier mağazamızdaki güncel stoklarla senkronize çalışır. Bekleme süresi olmadan hemen sipariş verebilirsiniz.
-              </p>
+        <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+          <div className="bg-gradient-to-br from-[#2B4C36] via-[#3B6447] to-[#4A7C59] text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/15 text-center space-y-6 relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-[#E9C46A]/15 blur-3xl pointer-events-none" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 text-[#E9C46A] text-xs font-bold uppercase tracking-wider">
+              <Zap className="w-4 h-4 fill-current" />
+              <span>20 Gün Beklemeden • 24 Saatte Kargoda</span>
             </div>
-            <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-              <button
-                onClick={() => syncFromShopier(false)}
-                disabled={isSyncingShopier}
-                className="px-4 py-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/25 text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
-                title="Shopier Mağazasından Güncel Stokları Şimdi Çek"
-              >
-                <RotateCcw className={`w-4 h-4 ${isSyncingShopier ? 'animate-spin' : ''}`} />
-                <span>{isSyncingShopier ? 'Çekiliyor...' : 'Shopier Stoğunu Yenile'}</span>
-              </button>
-              <button
-                onClick={() => setIsStockManagerOpen(!isStockManagerOpen)}
-                className="px-5 py-3 rounded-2xl bg-white text-[#3B6447] hover:bg-[#FAF7F2] text-xs font-bold flex items-center gap-2 shadow-lg transition-all cursor-pointer"
-              >
-                <Settings className="w-4 h-4" />
-                <span>Shopier Bağlantı & Stok Ayarları</span>
-              </button>
+
+            <h1 className="font-serif-luxury text-3xl sm:text-5xl font-bold max-w-2xl mx-auto leading-tight">
+              Hazır Stoklu Ürünlerimiz Shopier Mağazamızda!
+            </h1>
+
+            <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto leading-relaxed">
+              Anlık güncellenen tüm hazır stoklu parfümlerimizi, güncel adetlerini ve fiyatlarını doğrudan resmi <strong>Shopier</strong> mağazamız üzerinden inceleyebilir ve 256-bit SSL güvencesiyle hemen sipariş verebilirsiniz.
+            </p>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href={SHOPIER_LINKS.store}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3 rounded-2xl bg-[#1E1E1C] hover:bg-black text-white text-xs font-bold flex items-center gap-2 shadow-lg transition-all"
+                className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#1E1E1C] hover:bg-black text-white text-sm sm:text-base font-bold flex items-center justify-center gap-3 shadow-xl transition-all"
               >
-                <span>Shopier Mağaza Vitrini</span>
+                <ShoppingBag className="w-5 h-5 text-[#E9C46A]" />
+                <span>Shopier Mağazamıza Git (Tüm Stoklu Ürünler)</span>
                 <ExternalLink className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* STOK & SHOPIER LİNK YÖNETİM PANELİ */}
-          {isStockManagerOpen && (
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#4A7C59] shadow-xl space-y-6 animate-in fade-in duration-200">
-              <div className="flex items-center justify-between border-b border-[#E6E0D6] pb-4">
-                <div>
-                  <span className="text-xs font-bold text-[#4A7C59] uppercase tracking-wider">OTOMATİK SHOPIER SENKRONİZASYONU & YÖNETİM</span>
-                  <h2 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Shopier Canlı Stok Bağlantısı</h2>
-                </div>
-                <button onClick={() => setIsStockManagerOpen(false)} className="p-2 rounded-full bg-[#FAF7F2] hover:bg-[#E6E0D6]">
-                  <X className="w-5 h-5 text-[#1E1E1C]" />
-                </button>
-              </div>
-
-              {/* Shopier Otomatik API Bağlantı Kutusu */}
-              <div className="bg-[#F3EFE6] p-5 rounded-2xl border border-[#4A7C59]/30 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div>
-                    <h3 className="text-sm font-bold text-[#1E1E1C] flex items-center gap-2">
-                      <Zap className="w-4 h-4 text-[#4A7C59]" />
-                      <span>Shopier API (Personal Access Token) ile Tam Otomatik Stok Çekme</span>
-                    </h3>
-                    <p className="text-xs text-[#5A5751] mt-0.5">
-                      Shopier mağazanıza eklediğiniz her ürünün adedini ve fiyatını anlık çekmek için Shopier API anahtarınızı girebilir veya doğrudan mağaza vitrin taramasını kullanabilirsiniz.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => syncFromShopier(false)}
-                    className="px-4 py-2 rounded-xl bg-[#4A7C59] text-white text-xs font-bold flex items-center gap-1.5 shrink-0"
-                  >
-                    <RotateCcw className={`w-3.5 h-3.5 ${isSyncingShopier ? 'animate-spin' : ''}`} />
-                    <span>Şimdi Senkronize Et</span>
-                  </button>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <input
-                    type="password"
-                    placeholder="İsteğe Bağlı: Shopier Personal Access Token (PAT) yapıştırın..."
-                    value={shopierTokenInput}
-                    onChange={(e) => {
-                      setShopierTokenInput(e.target.value);
-                      try {
-                        localStorage.setItem('frestin_shopier_pat', e.target.value);
-                      } catch (err) {}
-                    }}
-                    className="flex-1 px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-white text-xs focus:outline-none focus:border-[#4A7C59]"
-                  />
-                  <button
-                    onClick={() => syncFromShopier(false)}
-                    className="px-5 py-2.5 rounded-xl bg-[#1E1E1C] text-white text-xs font-bold"
-                  >
-                    Anahtarı Kaydet & Stokları Çek
-                  </button>
-                </div>
-              </div>
-
-              {/* Yeni Ürün Ekleme Formu */}
-              <form onSubmit={handleAddNewStockPerfume} className="bg-[#FAF7F2] p-5 rounded-2xl border border-[#E6E0D6] space-y-4">
-                <h3 className="text-sm font-bold text-[#1E1E1C] flex items-center gap-2">
-                  <Plus className="w-4 h-4 text-[#4A7C59]" />
-                  <span>Shopier&apos;e Eklediğiniz Yeni Stoklu Parfümü Buraya Ekleyin</span>
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <input
-                    type="text"
-                    placeholder="Parfüm Adı (Örn: Frestin Sauvage)"
-                    value={newStockPerfumeForm.name}
-                    onChange={(e) => setNewStockPerfumeForm({ ...newStockPerfumeForm, name: e.target.value })}
-                    required
-                    className="px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-white text-xs focus:outline-none focus:border-[#4A7C59]"
-                  />
-                  <input
-                    type="text"
-                    placeholder="İlham Alınan Ref (Örn: Dior Sauvage)"
-                    value={newStockPerfumeForm.fragranticaRef}
-                    onChange={(e) => setNewStockPerfumeForm({ ...newStockPerfumeForm, fragranticaRef: e.target.value })}
-                    className="px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-white text-xs focus:outline-none focus:border-[#4A7C59]"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Stok Adedi"
-                    value={newStockPerfumeForm.stockCount}
-                    onChange={(e) => setNewStockPerfumeForm({ ...newStockPerfumeForm, stockCount: e.target.value })}
-                    className="px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-white text-xs focus:outline-none focus:border-[#4A7C59]"
-                  />
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="url"
-                    placeholder="Shopier 50ml Ürün Linki (İsteğe bağlı)"
-                    value={newStockPerfumeForm.shopierLink50}
-                    onChange={(e) => setNewStockPerfumeForm({ ...newStockPerfumeForm, shopierLink50: e.target.value })}
-                    className="px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-white text-xs focus:outline-none focus:border-[#4A7C59]"
-                  />
-                  <input
-                    type="url"
-                    placeholder="Shopier 100ml Ürün Linki (İsteğe bağlı)"
-                    value={newStockPerfumeForm.shopierLink100}
-                    onChange={(e) => setNewStockPerfumeForm({ ...newStockPerfumeForm, shopierLink100: e.target.value })}
-                    className="px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-white text-xs focus:outline-none focus:border-[#4A7C59]"
-                  />
-                </div>
-                <button type="submit" className="px-5 py-2.5 rounded-xl bg-[#4A7C59] hover:bg-[#3B6447] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm">
-                  <Plus className="w-4 h-4" />
-                  <span>Stoklu Ürünü Listeye Ekle</span>
-                </button>
-              </form>
-
-              {/* Mevcut Katalog Stok ve Link Düzenleme Listesi */}
+          {/* HIZLI SHOPIER SİPARİŞ KARTLARI */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a
+              href={SHOPIER_LINKS.store}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-3xl border border-[#E6E0D6] hover:border-[#4A7C59] shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group"
+            >
               <div className="space-y-3">
-                <h3 className="text-sm font-bold text-[#1E1E1C]">Mevcut Parfümlerin Stok & Shopier Linkleri:</h3>
-                <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
-                  {catalog.map((item) => (
-                    <div key={item.id} className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E6E0D6] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-sm text-[#1E1E1C]">{item.name}</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#4A7C59] text-white font-bold">{item.code}</span>
-                        </div>
-                        <div className="text-xs text-[#78756E]">{item.fragranticaRef}</div>
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-                        <button
-                          onClick={() => updateStockConfig(item.id, { inStock: !item.inStock })}
-                          className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors ${
-                            item.inStock ? 'bg-[#4A7C59] text-white' : 'bg-[#D95338] text-white'
-                          }`}
-                        >
-                          {item.inStock ? <CheckCircle2 className="w-3.5 h-3.5" /> : <X className="w-3.5 h-3.5" />}
-                          <span>{item.inStock ? `Stokta (${item.stockCount})` : 'Tükendi'}</span>
-                        </button>
-
-                        <div className="flex-1 md:w-48">
-                          <input
-                            type="url"
-                            placeholder="Shopier 50ml Linki..."
-                            defaultValue={item.shopierLink50}
-                            onBlur={(e) => updateStockConfig(item.id, { shopierLink50: e.target.value })}
-                            className="w-full px-3 py-2 rounded-xl border border-[#DED8CE] bg-white text-[11px] focus:outline-none focus:border-[#4A7C59]"
-                            title="50ml Özel Shopier Linki"
-                          />
-                        </div>
-
-                        <div className="flex-1 md:w-48">
-                          <input
-                            type="url"
-                            placeholder="Shopier 100ml Linki..."
-                            defaultValue={item.shopierLink100}
-                            onBlur={(e) => updateStockConfig(item.id, { shopierLink100: e.target.value })}
-                            className="w-full px-3 py-2 rounded-xl border border-[#DED8CE] bg-white text-[11px] focus:outline-none focus:border-[#4A7C59]"
-                            title="100ml Özel Shopier Linki"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <div className="w-12 h-12 rounded-2xl bg-[#4A7C59]/15 text-[#4A7C59] flex items-center justify-center">
+                  <PackageCheck className="w-6 h-6" />
                 </div>
+                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#4A7C59]">Anlık Güncel Liste</span>
+                <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C] group-hover:text-[#4A7C59] transition-colors">
+                  Tüm Stoklu Parfümleri Gör
+                </h3>
+                <p className="text-xs text-[#5A5751] leading-relaxed">
+                  Şu an stokta hazır bulunan ve aynı gün / ertesi gün kargoya teslim edilen tüm parfümlerimizi Shopier vitrinimizde görüntüleyin.
+                </p>
               </div>
-            </div>
-          )}
+              <div className="mt-6 pt-4 border-t border-[#E6E0D6] flex items-center justify-between text-xs font-bold text-[#4A7C59]">
+                <span>Shopier Vitrinini Aç</span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </a>
 
-          {/* Stoklu Ürünler Kartları */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {stockedProducts.map((product) => {
+            <a
+              href={SHOPIER_LINKS['50ml']}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-3xl border border-[#E6E0D6] hover:border-[#E86F38] shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#E86F38]/15 text-[#E86F38] flex items-center justify-center font-bold text-sm">
+                  50ml
+                </div>
+                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#E86F38]">{PRICE_50ML} TL • Hızlı Sipariş</span>
+                <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C] group-hover:text-[#E86F38] transition-colors">
+                  50 ml Frestin Parfüm Siparişi
+                </h3>
+                <p className="text-xs text-[#5A5751] leading-relaxed">
+                  50 ml kristal şişe parfüm siparişinizi doğrudan Shopier ödeme sayfası üzerinden güvenle oluşturun.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-[#E6E0D6] flex items-center justify-between text-xs font-bold text-[#E86F38]">
+                <span>50 ml Shopier Sayfasına Git</span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </a>
+
+            <a
+              href={SHOPIER_LINKS['100ml']}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white p-6 rounded-3xl border border-[#E6E0D6] hover:border-[#B86B43] shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#B86B43]/15 text-[#B86B43] flex items-center justify-center font-bold text-sm">
+                  100ml
+                </div>
+                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#B86B43]">{PRICE_100ML} TL • Avantajlı Boy</span>
+                <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C] group-hover:text-[#B86B43] transition-colors">
+                  100 ml Frestin Parfüm Siparişi
+                </h3>
+                <p className="text-xs text-[#5A5751] leading-relaxed">
+                  100 ml avantajlı boy kristal şişe parfüm siparişinizi doğrudan Shopier ödeme sayfası üzerinden oluşturun.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-[#E6E0D6] flex items-center justify-between text-xs font-bold text-[#B86B43]">
+                <span>100 ml Shopier Sayfasına Git</span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </a>
+          </div>
+        </main>
+      )}
+
+      {/* ================= TÜM PARFÜMLER (MAĞAZA) ================= */}
+      {activeTab === 'store' && (
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E6E0D6] pb-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#E86F38]">FRESTIN İMZA KOLEKSİYONU</span>
+              <h1 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#1E1E1C]">Tüm Parfümlerimiz</h1>
+            </div>
+            <a
+              href={SHOPIER_LINKS.store}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-3 rounded-2xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center gap-2 self-start sm:self-auto shadow-sm"
+            >
+              <span>Shopier Mağazamızda Gör</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {catalog.map((product) => {
               const selectedSize = getSelectedSize(product.id);
-              const price = selectedSize === '100ml' ? PRICE_100ML : PRICE_50ML;
-              const finalShopierLink = selectedSize === '100ml' ? (product.shopierLink100 || SHOPIER_LINKS['100ml']) : (product.shopierLink50 || SHOPIER_LINKS['50ml']);
+              const finalShopierLink =
+                selectedSize === '100ml'
+                  ? product.shopierLink100 || SHOPIER_LINKS['100ml']
+                  : product.shopierLink50 || SHOPIER_LINKS['50ml'];
               return (
-                <div key={product.id} className="bg-white rounded-3xl border border-[#4A7C59]/40 hover:border-[#4A7C59] transition-all shadow-sm hover:shadow-xl flex flex-col overflow-hidden group">
-                  <div onClick={() => setDetailModalProduct(product)} className="relative bg-[#F3EFE6]/70 pt-8 pb-6 px-4 flex flex-col items-center cursor-pointer">
-                    <span className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-[#4A7C59] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm">
-                      <Zap className="w-3.5 h-3.5 fill-current text-[#E9C46A]" />
-                      <span>HEMEN TESLİM ({product.stockCount} Adet)</span>
-                    </span>
+                <div
+                  key={product.id}
+                  className="bg-white rounded-3xl border border-[#E6E0D6] hover:border-[#E86F38] transition-all shadow-xs hover:shadow-xl flex flex-col overflow-hidden group"
+                >
+                  <div
+                    onClick={() => setDetailModalProduct(product)}
+                    className="relative bg-[#F3EFE6]/70 pt-8 pb-6 px-4 flex flex-col items-center cursor-pointer"
+                  >
                     <div className="group-hover:scale-105 transition-transform duration-300">
-                      <RealFrestinBottleCardSVG labelColor={product.bottleColor} liquidTint={product.liquidTint} title={product.code} subLabel={product.name.replace('Frestin ', '')} />
+                      <RealFrestinBottleCardSVG
+                        labelColor={product.bottleColor}
+                        liquidTint={product.liquidColor}
+                        title={product.code}
+                        subLabel={product.name.replace('Frestin ', '').slice(0, 14)}
+                      />
                     </div>
                   </div>
 
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                     <div>
                       <div className="flex items-center justify-between text-xs text-[#78756E] mb-1">
-                        <span>{product.gender} • Ref: {product.fragranticaRef}</span>
-                        <div className="flex items-center gap-1">
+                        <span className="truncate max-w-[140px]">{product.fragranticaRef}</span>
+                        <div className="flex items-center gap-1 shrink-0">
                           <Star className="w-3.5 h-3.5 fill-[#E9C46A] text-[#E9C46A]" />
                           <span className="font-bold text-[#1E1E1C]">{product.rating}</span>
                         </div>
                       </div>
-                      <h3 onClick={() => setDetailModalProduct(product)} className="font-serif-luxury text-2xl font-bold text-[#1E1E1C] cursor-pointer hover:text-[#4A7C59] transition-colors">
+                      <h3
+                        onClick={() => setDetailModalProduct(product)}
+                        className="font-serif-luxury text-xl font-bold text-[#1E1E1C] cursor-pointer hover:text-[#E86F38] transition-colors"
+                      >
                         {product.name}
                       </h3>
                       <p className="text-xs text-[#5A5751] mt-1">{product.subtitle}</p>
                     </div>
 
-                    <div className="space-y-3 pt-4 border-t border-[#E6E0D6]">
+                    <div className="space-y-3 pt-3 border-t border-[#E6E0D6]">
                       <div className="flex bg-[#F3EFE6] p-1 rounded-xl">
-                        <button onClick={() => setSelectedSize(product.id, '50ml')} className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${selectedSize === '50ml' ? 'bg-white text-[#1E1E1C] shadow-2xs' : 'text-[#78756E]'}`}>
-                          50 ml ({PRICE_50ML} TL)
+                        <button
+                          onClick={() => setSelectedSize(product.id, '50ml')}
+                          className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                            selectedSize === '50ml' ? 'bg-white text-[#1E1E1C] shadow-xs' : 'text-[#78756E]'
+                          }`}
+                        >
+                          50ml ({PRICE_50ML}₺)
                         </button>
-                        <button onClick={() => setSelectedSize(product.id, '100ml')} className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${selectedSize === '100ml' ? 'bg-white text-[#1E1E1C] shadow-2xs' : 'text-[#78756E]'}`}>
-                          100 ml ({PRICE_100ML} TL)
+                        <button
+                          onClick={() => setSelectedSize(product.id, '100ml')}
+                          className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                            selectedSize === '100ml' ? 'bg-white text-[#1E1E1C] shadow-xs' : 'text-[#78756E]'
+                          }`}
+                        >
+                          100ml ({PRICE_100ML}₺)
                         </button>
                       </div>
 
                       <div className="grid grid-cols-2 gap-2">
-                        <button
-                          onClick={() => setShopierRedirectModal({ product, size: selectedSize, url: finalShopierLink })}
-                          className="py-3 px-4 rounded-xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
+                        <a
+                          href={finalShopierLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-2.5 px-3 rounded-xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center justify-center gap-1 shadow-sm transition-all"
                         >
-                          <span>Shopier&apos;den Al</span>
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </button>
+                          <span>Shopier Al</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
                         <button
                           onClick={() => addToCart(product, selectedSize)}
-                          className="py-3 px-4 rounded-xl bg-[#1E1E1C] hover:bg-[#333] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+                          className="py-2.5 px-3 rounded-xl bg-[#1E1E1C] hover:bg-[#333] text-white text-xs font-bold flex items-center justify-center gap-1 transition-all"
                         >
                           <ShoppingBag className="w-3.5 h-3.5" />
                           <span>Sepete Ekle</span>
@@ -1334,112 +917,6 @@ export default function App() {
                 </div>
               );
             })}
-          </div>
-        </main>
-      )}
-
-      {/* ================= TÜM MAĞAZA (KOLEKSİYON) ================= */}
-      {activeTab === 'store' && (
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-          <div className="bg-gradient-to-r from-[#1E1E1C] to-[#2D2825] text-white rounded-3xl p-6 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-3 max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#F89843]">FRESTIN PERFUME KOLEKSİYONU</span>
-              <h1 className="font-serif-luxury text-3xl sm:text-4xl font-bold">Tüm Özel Parfümlerimiz ({catalog.length}+)</h1>
-              <p className="text-xs sm:text-sm text-[#D6CFC2] leading-relaxed">
-                Yüksek esans oranı (%25-%28 Extrait), kusursuz valf sistemi ve zamansız kristal şişe tasarımıyla tüm koleksiyonumuzu keşfedin.
-              </p>
-            </div>
-            <div className="flex items-center gap-3 shrink-0">
-              <input
-                type="text"
-                placeholder="Parfüm ara..."
-                value={storeSearch}
-                onChange={(e) => setStoreSearch(e.target.value)}
-                className="px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white text-xs placeholder:text-white/50 focus:outline-none focus:border-[#F89843]"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-2 pb-2">
-            {['Tümü', 'Unisex', 'Kadın', 'Erkek'].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setStoreFilter(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all ${
-                  storeFilter === cat ? 'bg-[#1E1E1C] text-white shadow-md' : 'bg-white hover:bg-[#F3EFE6] text-[#5A5751] border border-[#E6E0D6]'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {catalog
-              .filter((p) => {
-                if (storeFilter !== 'Tümü' && p.gender !== storeFilter) return false;
-                if (storeSearch.trim() && !p.name.toLowerCase().includes(storeSearch.toLowerCase()) && !p.fragranticaRef.toLowerCase().includes(storeSearch.toLowerCase())) return false;
-                return true;
-              })
-              .map((product) => {
-                const selectedSize = getSelectedSize(product.id);
-                const finalShopierLink = selectedSize === '100ml' ? (product.shopierLink100 || SHOPIER_LINKS['100ml']) : (product.shopierLink50 || SHOPIER_LINKS['50ml']);
-                return (
-                  <div key={product.id} className="bg-white rounded-3xl border border-[#E6E0D6] hover:border-[#E86F38]/50 transition-all shadow-xs hover:shadow-xl flex flex-col justify-between group">
-                    <div onClick={() => setDetailModalProduct(product)} className="relative bg-[#FAF7F2] pt-6 pb-4 px-4 flex flex-col items-center cursor-pointer">
-                      {product.inStock && (
-                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#4A7C59] text-white text-[10px] font-bold flex items-center gap-1">
-                          <Zap className="w-3 h-3 fill-current" />
-                          <span>STOKTA</span>
-                        </span>
-                      )}
-                      <div className="group-hover:scale-105 transition-transform duration-300">
-                        <RealFrestinBottleCardSVG labelColor={product.bottleColor} liquidTint={product.liquidTint} title={product.code} subLabel={product.name.replace('Frestin ', '')} />
-                      </div>
-                    </div>
-
-                    <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                      <div>
-                        <div className="flex items-center justify-between text-xs text-[#78756E] mb-1">
-                          <span>{product.gender}</span>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-3.5 h-3.5 fill-[#E9C46A] text-[#E9C46A]" />
-                            <span className="font-bold text-[#1E1E1C]">{product.rating}</span>
-                          </div>
-                        </div>
-                        <h3 onClick={() => setDetailModalProduct(product)} className="font-serif-luxury text-xl font-bold text-[#1E1E1C] cursor-pointer hover:text-[#E86F38]">
-                          {product.name}
-                        </h3>
-                        <p className="text-xs text-[#78756E] mt-0.5">{product.fragranticaRef}</p>
-                      </div>
-
-                      <div className="space-y-3 pt-3 border-t border-[#E6E0D6]">
-                        <div className="flex bg-[#F3EFE6] p-1 rounded-xl">
-                          <button onClick={() => setSelectedSize(product.id, '50ml')} className={`flex-1 py-1.5 rounded-lg text-xs font-bold ${selectedSize === '50ml' ? 'bg-white text-[#1E1E1C]' : 'text-[#78756E]'}`}>
-                            50ml ({PRICE_50ML} TL)
-                          </button>
-                          <button onClick={() => setSelectedSize(product.id, '100ml')} className={`flex-1 py-1.5 rounded-lg text-xs font-bold ${selectedSize === '100ml' ? 'bg-white text-[#1E1E1C]' : 'text-[#78756E]'}`}>
-                            100ml ({PRICE_100ML} TL)
-                          </button>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-2">
-                          {product.inStock && (
-                            <button onClick={() => setShopierRedirectModal({ product, size: selectedSize, url: finalShopierLink })} className="py-2.5 px-3 rounded-xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center justify-center gap-1">
-                              <span>Shopier Al</span>
-                              <ExternalLink className="w-3 h-3" />
-                            </button>
-                          )}
-                          <button onClick={() => addToCart(product, selectedSize)} className={`py-2.5 px-3 rounded-xl bg-[#1E1E1C] hover:bg-[#333] text-white text-xs font-bold flex items-center justify-center gap-1 ${!product.inStock ? 'col-span-2' : ''}`}>
-                            <ShoppingBag className="w-3.5 h-3.5" />
-                            <span>Sepete Ekle</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
           </div>
         </main>
       )}
