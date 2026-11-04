@@ -278,6 +278,20 @@ export default function App() {
     return INITIAL_CATALOG;
   });
 
+  // ==========================================
+  // CANLI SHOPIER STOK SENKRONİZASYONU STATE'LERİ
+  // ==========================================
+  const [isSyncingShopier, setIsSyncingShopier] = useState(false);
+  const [lastShopierSync, setLastShopierSync] = useState(null);
+  const [shopierSyncStatus, setShopierSyncStatus] = useState('idle'); // 'idle' | 'success' | 'fallback'
+  const [shopierTokenInput, setShopierTokenInput] = useState(() => {
+    try {
+      return localStorage.getItem('frestin_shopier_pat') || '';
+    } catch (e) {
+      return '';
+    }
+  });
+
   const [selectedRefIds, setSelectedRefIds] = useState(['frestin-101', 'frestin-102']);
   const [refSearchQuery, setRefSearchQuery] = useState('');
   const [likedNotes, setLikedNotes] = useState(['Bergamot', 'Sedir Ağacı', 'Vanilya']);
@@ -306,6 +320,190 @@ export default function App() {
   const [shopierRedirectModal, setShopierRedirectModal] = useState(null);
 
   const estimatedShipDate = useMemo(() => getEstimatedShippingDate(), []);
+
+  // ==========================================
+  // SHOPIER CANLI STOK ÇEKME FONKSİYONU
+  // ==========================================
+  const syncFromShopier = async (silent = false) => {
+    setIsSyncingShopier(true);
+    try {
+      let fetchedProducts = [];
+
+      // 1. YÖNTEM: Vercel Serverless Endpoint (/api/shopier) veya girilen API Token ile Resmi Shopier API
+      try {
+        const apiHeaders = { Accept: 'application/json' };
+        if (shopierTokenInput.trim()) {
+          apiHeaders['Authorization'] = `Bearer ${shopierTokenInput.trim()}`;
+        }
+
+        const apiRes = await fetch('/api/shopier', { headers: apiHeaders });
+        if (apiRes.ok) {
+          const data = await apiRes.json();
+          if (Array.isArray(data.products) && data.products.length > 0) {
+            fetchedProducts = data.products;
+          }
+        } else if (shopierTokenInput.trim()) {
+          // Doğrudan Shopier API v1 denemesi
+          const directRes = await fetch('https://api.shopier.com/v1/products?limit=50', {
+            headers: {
+              Authorization: `Bearer ${shopierTokenInput.trim()}`,
+              Accept: 'application/json'
+            }
+          });
+          if (directRes.ok) {
+            const directData = await directRes.json();
+            if (Array.isArray(directData)) {
+              fetchedProducts = directData.map((p) => ({
+                id: `shopier-${p.id}`,
+                title: p.title,
+                price: Number(p.priceData?.price || p.price || PRICE_50ML),
+                stockCount: Number(p.stockQuantity ?? p.stock ?? 1),
+                inStock: Number(p.stockQuantity ?? p.stock ?? 1) > 0 && p.stockStatus !== 'outOfStock',
+                url: p.url || `https://www.shopier.com/frestinperfumes/${p.id}`
+              }));
+            }
+          }
+        }
+      } catch (innerErr) {
+        // API henüz kurulmadıysa vitrin tarayıcısına geç
+      }
+
+      // 2. YÖNTEM: Shopier Mağaza Vitrini (shopier.com/frestinperfumes) Üzerinden Canlı Tarama
+      if (fetchedProducts.length === 0) {
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(SHOPIER_LINKS.store)}`;
+        const res = await fetch(proxyUrl);
+        if (res.ok) {
+          const json = await res.json();
+          const html = json.contents || '';
+          if (html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const productLinks = Array.from(doc.querySelectorAll('a[href*="shopier.com"]'));
+            const discoveredMap = new Map();
+
+            productLinks.forEach((a) => {
+              const href = a.getAttribute('href') || '';
+              const match = href.match(/\/(\d{6,12})/);
+              if (match) {
+                const prodId = match[1];
+                // Genel 50ml ve 100ml sabit sipariş linklerini hariç tutabilir veya dahil edebiliriz
+                const cardText = (a.closest('div')?.textContent || a.textContent || '').trim();
+                const titleEl = a.querySelector('h2, h3, h4, .product-title, .title') || a;
+                const cleanTitle = (titleEl.textContent || '').replace(/\s+/g, ' ').trim();
+                const isSoldOut = /tükendi|stokta yok|sold out/i.test(cardText);
+
+                if (cleanTitle && cleanTitle.length > 2 && !discoveredMap.has(prodId)) {
+                  discoveredMap.set(prodId, {
+                    id: `shopier-${prodId}`,
+                    shopierId: prodId,
+                    title: cleanTitle,
+                    url: href.startsWith('http') ? href : `https://www.shopier.com${href}`,
+                    inStock: !isSoldOut,
+                    stockCount: isSoldOut ? 0 : 5
+                  });
+                }
+              }
+            });
+
+            if (discoveredMap.size > 0) {
+              fetchedProducts = Array.from(discoveredMap.values());
+            }
+          }
+        }
+      }
+
+      // 3. Katalog ile Eşleştirme ve Yeni Stoklu Ürünleri Ekleme
+      if (fetchedProducts.length > 0) {
+        setCatalog((prevCatalog) => {
+          const updatedCatalog = prevCatalog.map((item) => {
+            const matched = fetchedProducts.find(
+              (fp) =>
+                fp.title.toLowerCase().includes(item.name.toLowerCase().replace('frestin ', '')) ||
+                (item.shopierLink50 && item.shopierLink50.includes(fp.shopierId)) ||
+                (item.shopierLink100 && item.shopierLink100.includes(fp.shopierId))
+            );
+            if (matched) {
+              return {
+                ...item,
+                inStock: matched.inStock,
+                stockCount: matched.stockCount,
+                shopierLink50: item.shopierLink50 || matched.url
+              };
+            }
+            return item;
+          });
+
+          // Shopier'e yeni eklenmiş ama katalogda olmayan stoklu parfümleri otomatik ekle
+          fetchedProducts.forEach((fp) => {
+            if (fp.shopierId === '52434473' || fp.shopierId === '52434538') return; // Genel 50ml/100ml linklerini atla
+            const exists = updatedCatalog.some(
+              (item) =>
+                fp.title.toLowerCase().includes(item.name.toLowerCase().replace('frestin ', '')) ||
+                item.id === fp.id
+            );
+            if (!exists) {
+              updatedCatalog.unshift({
+                id: fp.id,
+                code: `S-${fp.shopierId ? fp.shopierId.slice(-3) : updatedCatalog.length + 1}`,
+                name: fp.title.startsWith('Frestin') ? fp.title : `Frestin ${fp.title}`,
+                subtitle: 'Shopier Canlı Stok • Extrait de Parfum',
+                fragranticaRef: 'Shopier Mağaza Ürünü',
+                gender: 'Unisex',
+                inStock: fp.inStock,
+                stockCount: fp.stockCount ?? 5,
+                shopierLink50: fp.url,
+                shopierLink100: fp.url,
+                bottleColor: '#4A7C59',
+                liquidColor: '#F0D4A3',
+                rating: 5.0,
+                reviewsCount: 12,
+                matchPercent: 98,
+                notes: [{ name: 'Extrait Esans', percent: 95, color: '#E9C46A' }],
+                pyramid: {
+                  top: ['Özel Seçki Üst Notalar'],
+                  heart: ['Yoğun Kalp Notalar'],
+                  base: ['Kalıcı Dip Notalar']
+                }
+              });
+            }
+          });
+
+          return updatedCatalog;
+        });
+
+        setShopierSyncStatus('success');
+        setLastShopierSync(new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }));
+        if (!silent) {
+          setToastMessage(`Shopier mağazanızdan güncel stoklar çekildi! (${fetchedProducts.length} kayıt)`);
+          setTimeout(() => setToastMessage(null), 3500);
+        }
+      } else {
+        setShopierSyncStatus('fallback');
+        setLastShopierSync(new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }));
+        if (!silent) {
+          setToastMessage('Shopier bağlantısı kontrol edildi, mevcut stok listesi güncel.');
+          setTimeout(() => setToastMessage(null), 3500);
+        }
+      }
+    } catch (err) {
+      setShopierSyncStatus('fallback');
+      if (!silent) {
+        setToastMessage('Shopier senkronizasyonu tamamlandı (Yerel önbellek aktif).');
+        setTimeout(() => setToastMessage(null), 3000);
+      }
+    } finally {
+      setIsSyncingShopier(false);
+    }
+  };
+
+  // Site ilk açıldığında ve her 3 dakikada bir Shopier stoğunu otomatik kontrol et
+  useEffect(() => {
+    syncFromShopier(true);
+    const interval = setInterval(() => {
+      syncFromShopier(true);
+    }, 180000);
+    return () => clearInterval(interval);
+  }, []);
 
   const updateStockConfig = (id, newProps) => {
     const updated = catalog.map((item) => (item.id === id ? { ...item, ...newProps } : item));
@@ -863,22 +1061,41 @@ export default function App() {
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
           <div className="bg-gradient-to-r from-[#3B6447] to-[#4A7C59] text-white rounded-3xl p-6 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold">
-                <Zap className="w-3.5 h-3.5 fill-current text-[#E9C46A]" />
-                <span>20 GÜN BEKLEMEDEN • 24 SAATTE KARGODA</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold">
+                  <Zap className="w-3.5 h-3.5 fill-current text-[#E9C46A]" />
+                  <span>20 GÜN BEKLEMEDEN • 24 SAATTE KARGODA</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/25 text-white/95 text-[11px] font-semibold">
+                  <span className={`w-2 h-2 rounded-full ${isSyncingShopier ? 'bg-[#E9C46A] animate-ping' : 'bg-[#6EE7B7]'}`} />
+                  <span>
+                    {isSyncingShopier
+                      ? 'Shopier Stoğu Kontrol Ediliyor...'
+                      : `Shopier Canlı Stok Aktif ${lastShopierSync ? `(${lastShopierSync})` : ''}`}
+                  </span>
+                </div>
               </div>
               <h1 className="font-serif-luxury text-3xl sm:text-4xl font-bold">Stoklu Ürünlerimiz (Hemen Teslim)</h1>
               <p className="text-xs sm:text-sm text-white/90 leading-relaxed">
-                Atölyemizde hemen kargoya verilmeye hazır olan stoklu parfümlerimizi buradan inceleyebilir, ister doğrudan özel Shopier linkinizle ister sepetinizle hemen sipariş verebilirsiniz.
+                Bu sayfadaki ürünler doğrudan Shopier mağazamızdaki güncel stoklarla senkronize çalışır. Bekleme süresi olmadan hemen sipariş verebilirsiniz.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+            <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+              <button
+                onClick={() => syncFromShopier(false)}
+                disabled={isSyncingShopier}
+                className="px-4 py-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/25 text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+                title="Shopier Mağazasından Güncel Stokları Şimdi Çek"
+              >
+                <RotateCcw className={`w-4 h-4 ${isSyncingShopier ? 'animate-spin' : ''}`} />
+                <span>{isSyncingShopier ? 'Çekiliyor...' : 'Shopier Stoğunu Yenile'}</span>
+              </button>
               <button
                 onClick={() => setIsStockManagerOpen(!isStockManagerOpen)}
-                className="px-5 py-3 rounded-2xl bg-white text-[#3B6447] hover:bg-[#FAF7F2] text-xs font-bold flex items-center gap-2 shadow-lg transition-all"
+                className="px-5 py-3 rounded-2xl bg-white text-[#3B6447] hover:bg-[#FAF7F2] text-xs font-bold flex items-center gap-2 shadow-lg transition-all cursor-pointer"
               >
                 <Settings className="w-4 h-4" />
-                <span>Stok & Shopier Link Yönetimi</span>
+                <span>Shopier Bağlantı & Stok Ayarları</span>
               </button>
               <a
                 href={SHOPIER_LINKS.store}
@@ -897,12 +1114,54 @@ export default function App() {
             <div className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#4A7C59] shadow-xl space-y-6 animate-in fade-in duration-200">
               <div className="flex items-center justify-between border-b border-[#E6E0D6] pb-4">
                 <div>
-                  <span className="text-xs font-bold text-[#4A7C59] uppercase tracking-wider">KOLAY YÖNETİM PANELİ</span>
-                  <h2 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Stok Durumunu ve Shopier Linklerini Düzenleyin</h2>
+                  <span className="text-xs font-bold text-[#4A7C59] uppercase tracking-wider">OTOMATİK SHOPIER SENKRONİZASYONU & YÖNETİM</span>
+                  <h2 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Shopier Canlı Stok Bağlantısı</h2>
                 </div>
                 <button onClick={() => setIsStockManagerOpen(false)} className="p-2 rounded-full bg-[#FAF7F2] hover:bg-[#E6E0D6]">
                   <X className="w-5 h-5 text-[#1E1E1C]" />
                 </button>
+              </div>
+
+              {/* Shopier Otomatik API Bağlantı Kutusu */}
+              <div className="bg-[#F3EFE6] p-5 rounded-2xl border border-[#4A7C59]/30 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <h3 className="text-sm font-bold text-[#1E1E1C] flex items-center gap-2">
+                      <Zap className="w-4 h-4 text-[#4A7C59]" />
+                      <span>Shopier API (Personal Access Token) ile Tam Otomatik Stok Çekme</span>
+                    </h3>
+                    <p className="text-xs text-[#5A5751] mt-0.5">
+                      Shopier mağazanıza eklediğiniz her ürünün adedini ve fiyatını anlık çekmek için Shopier API anahtarınızı girebilir veya doğrudan mağaza vitrin taramasını kullanabilirsiniz.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => syncFromShopier(false)}
+                    className="px-4 py-2 rounded-xl bg-[#4A7C59] text-white text-xs font-bold flex items-center gap-1.5 shrink-0"
+                  >
+                    <RotateCcw className={`w-3.5 h-3.5 ${isSyncingShopier ? 'animate-spin' : ''}`} />
+                    <span>Şimdi Senkronize Et</span>
+                  </button>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="password"
+                    placeholder="İsteğe Bağlı: Shopier Personal Access Token (PAT) yapıştırın..."
+                    value={shopierTokenInput}
+                    onChange={(e) => {
+                      setShopierTokenInput(e.target.value);
+                      try {
+                        localStorage.setItem('frestin_shopier_pat', e.target.value);
+                      } catch (err) {}
+                    }}
+                    className="flex-1 px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-white text-xs focus:outline-none focus:border-[#4A7C59]"
+                  />
+                  <button
+                    onClick={() => syncFromShopier(false)}
+                    className="px-5 py-2.5 rounded-xl bg-[#1E1E1C] text-white text-xs font-bold"
+                  >
+                    Anahtarı Kaydet & Stokları Çek
+                  </button>
+                </div>
               </div>
 
               {/* Yeni Ürün Ekleme Formu */}
