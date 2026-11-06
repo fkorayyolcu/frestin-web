@@ -43,132 +43,316 @@ const INSTAGRAM_URL = 'https://www.instagram.com/frestin_perfumes/';
 
 const INITIAL_CATALOG = [
   {
-    id: 'frestin-101',
-    code: 'F-01',
-    name: 'Frestin Althaïr',
-    subtitle: 'Bourbon Vanilya & Tarçın • Extrait de Parfum',
-    fragranticaRef: 'Parfums de Marly Althaïr',
-    gender: 'Unisex',
-    inStock: true,
-    stockCount: 5,
-    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
-    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
-    bottleColor: '#7C1D1D',
-    liquidColor: '#F0D4A3',
-    rating: 4.9,
-    reviewsCount: 42,
-    matchPercent: 98,
-    notes: [
-      { name: 'Deri', percent: 80, color: '#7F5539' },
-      { name: 'Narenciye', percent: 76, color: '#E9C46A' }
-    ],
-    pyramid: {
-      top: ['Kan Portakalı', 'Greyfurt', 'Yeşil Elma'],
-      heart: ['Tarçın', 'Türk Gülü'],
-      base: ['Kehribar (Amber)', 'Deri', 'Tonka Fasulyesi', 'Paçuli']
-    }
+    id: 'frestin-101', code: 'F-01', name: 'Sauvage Elixir', subtitle: 'Baharatlı & Odunsu • Extrait', fragranticaRef: 'Dior Sauvage Elixir', gender: 'Erkek', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#1E293B', liquidColor: '#93C5FD', rating: 4.9, reviewsCount: 184,
+    notes: [{ name: 'Tarçın', percent: 95 }, { name: 'Lavanta', percent: 92 }, { name: 'Meyan Kökü', percent: 88 }, { name: 'Sandal Ağacı', percent: 85 }, { name: 'Kakule', percent: 84 }, { name: 'Greyfurt', percent: 80 }]
   },
   {
-    id: 'frestin-102',
-    code: 'F-02',
-    name: "Frestin L'Eau Par",
-    subtitle: 'Ferah & Akuatik • Extrait de Parfum',
-    fragranticaRef: 'Acqua di Giò Profondo & Fresh Series',
-    gender: 'Erkek',
-    inStock: true,
-    stockCount: 4,
-    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
-    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
-    bottleColor: '#1E293B',
-    liquidColor: '#DCE7EB',
-    rating: 4.8,
-    reviewsCount: 35,
-    matchPercent: 95,
-    notes: [
-      { name: 'Deniz Notaları', percent: 88, color: '#457B9D' },
-      { name: 'Bergamot', percent: 82, color: '#E9C46A' }
-    ],
-    pyramid: {
-      top: ['Deniz Notaları', 'Bergamot', 'Akuatik Akor'],
-      heart: ['Biberiye', 'Selin', 'Lavanta'],
-      base: ['Misk', 'Paçuli', 'Amber']
-    }
+    id: 'frestin-102', code: 'F-02', name: 'Aventus', subtitle: 'Meyveli & Dumanlı Şipre • Extrait', fragranticaRef: 'Creed Aventus', gender: 'Erkek', season: 'Dört Mevsim', time: 'Gündüz / Ofis', sillage: 'Yüksek',
+    bottleColor: '#111827', liquidColor: '#FEF08A', rating: 5.0, reviewsCount: 310,
+    notes: [{ name: 'Ananas', percent: 98 }, { name: 'Huş Ağacı', percent: 94 }, { name: 'Bergamot', percent: 92 }, { name: 'Meşe Yosunu', percent: 89 }, { name: 'Misk', percent: 86 }, { name: 'Siyah Frenk Üzümü', percent: 85 }]
   },
   {
-    id: 'frestin-103',
-    code: 'F-03',
-    name: 'Frestin Bordo 50ml',
-    subtitle: 'Signature Rouge Serisi • Extrait de Parfum',
-    fragranticaRef: 'Baccarat Rouge 540 Inspiration',
-    gender: 'Unisex',
-    inStock: true,
-    stockCount: 6,
-    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
-    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
-    bottleColor: '#6E1E26',
-    liquidColor: '#F2D4A3',
-    rating: 5.0,
-    reviewsCount: 68,
-    matchPercent: 99,
-    notes: [
-      { name: 'Safran', percent: 92, color: '#D4A373' },
-      { name: 'Yasemin', percent: 85, color: '#FEFAE0' }
-    ],
-    pyramid: {
-      top: ['Safran', 'Yasemin'],
-      heart: ['Amberwood', 'Ambregris'],
-      base: ['Köpknar Reçinesi', 'Sedir']
-    }
+    id: 'frestin-103', code: 'F-03', name: 'Bleu de Chanel', subtitle: 'Aromatik & Narenciye • Extrait', fragranticaRef: 'Chanel Bleu de Chanel Parfum', gender: 'Erkek', season: 'Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Yüksek',
+    bottleColor: '#0F172A', liquidColor: '#BAE6FD', rating: 4.9, reviewsCount: 165,
+    notes: [{ name: 'Limon Kabuğu', percent: 94 }, { name: 'Tütsü', percent: 90 }, { name: 'Sedir Ağacı', percent: 89 }, { name: 'Nane', percent: 85 }, { name: 'Sandal Ağacı', percent: 88 }, { name: 'Greyfurt', percent: 87 }]
   },
   {
-    id: 'frestin-104',
-    code: 'F-04',
-    name: 'Frestin Profondo',
-    subtitle: 'Derin & Ferah • Extrait de Parfum',
-    fragranticaRef: 'Alien & Profondo Mix',
-    gender: 'Kadın',
-    inStock: true,
-    stockCount: 3,
-    shopierLink50: 'https://www.shopier.com/frestinperfumes/52434473',
-    shopierLink100: 'https://www.shopier.com/frestinperfumes/52434538',
-    bottleColor: '#1F242D',
-    liquidColor: '#F7E6D0',
-    rating: 4.9,
-    reviewsCount: 29,
-    matchPercent: 97,
-    notes: [
-      { name: 'Yasemin', percent: 90, color: '#E9C46A' },
-      { name: 'Cashmeran', percent: 84, color: '#A3A380' }
-    ],
-    pyramid: {
-      top: ['Zambak', 'Yasemin'],
-      heart: ['Cashmeran Notaları'],
-      base: ['Beyaz Amber', 'Misk']
-    }
+    id: 'frestin-104', code: 'F-04', name: 'Althaïr', subtitle: 'Gurme Vanilya & Kakule • Extrait', fragranticaRef: 'Parfums de Marly Althaïr', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#7C2D12', liquidColor: '#FDE68A', rating: 5.0, reviewsCount: 142,
+    notes: [{ name: 'Bourbon Vanilya', percent: 98 }, { name: 'Portakal Çiçeği', percent: 91 }, { name: 'Tarçın', percent: 90 }, { name: 'Kakule', percent: 89 }, { name: 'Pralin', percent: 87 }, { name: 'Misk', percent: 84 }]
+  },
+  {
+    id: 'frestin-105', code: 'F-05', name: 'Acqua Di Gio Profondo', subtitle: 'Derin Okyanus & Mineral • Extrait', fragranticaRef: 'Giorgio Armani Acqua Di Gio Profondo', gender: 'Erkek', season: 'Yaz / İlkbahar', time: 'Gündüz', sillage: 'Orta - Yüksek',
+    bottleColor: '#1E3A8A', liquidColor: '#BFDBFE', rating: 4.9, reviewsCount: 138,
+    notes: [{ name: 'Deniz Notaları', percent: 97 }, { name: 'Bergamot', percent: 92 }, { name: 'Yeşil Mandalina', percent: 90 }, { name: 'Biberiye', percent: 85 }, { name: 'Paçuli', percent: 82 }, { name: 'Misk', percent: 80 }]
+  },
+  {
+    id: 'frestin-106', code: 'F-06', name: 'L\'Eau Par', subtitle: 'Akuatik Nilüfer & Nane • Extrait', fragranticaRef: 'Kenzo L\'Eau Par', gender: 'Unisex', season: 'Yaz / İlkbahar', time: 'Gündüz', sillage: 'Orta - Yüksek',
+    bottleColor: '#B87A1E', liquidColor: '#E0F2FE', rating: 4.8, reviewsCount: 94,
+    notes: [{ name: 'Su Notaları', percent: 96 }, { name: 'Nane', percent: 92 }, { name: 'Nilüfer', percent: 90 }, { name: 'Yeşil Leylak', percent: 86 }, { name: 'Beyaz Şeftali', percent: 84 }, { name: 'Sedir Ağacı', percent: 82 }]
+  },
+  {
+    id: 'frestin-107', code: 'F-07', name: 'Alien', subtitle: 'Gizemli Yasemin & Amber • Extrait', fragranticaRef: 'Mugler Alien', gender: 'Kadın', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#4C1D95', liquidColor: '#DDD6FE', rating: 4.9, reviewsCount: 176,
+    notes: [{ name: 'Hint Yasemini', percent: 98 }, { name: 'Kaşmir Ağacı', percent: 93 }, { name: 'Beyaz Amber', percent: 92 }, { name: 'Odunsu Notalar', percent: 88 }]
+  },
+  {
+    id: 'frestin-108', code: 'F-08', name: 'Libre Intense', subtitle: 'Lavanta & Madagaskar Vanilyası • Extrait', fragranticaRef: 'Yves Saint Laurent Libre Intense', gender: 'Kadın', season: 'Kış / Sonbahar', time: 'Gece / Özel Gün', sillage: 'Çok Yüksek',
+    bottleColor: '#78350F', liquidColor: '#FDE047', rating: 4.9, reviewsCount: 204,
+    notes: [{ name: 'Lavanta', percent: 96 }, { name: 'Portakal Çiçeği', percent: 94 }, { name: 'Vanilya', percent: 93 }, { name: 'Tonka Fasulyesi', percent: 89 }, { name: 'Orkide', percent: 86 }, { name: 'Bergamot', percent: 84 }]
+  },
+  {
+    id: 'frestin-109', code: 'F-09', name: 'Good Girl', subtitle: 'Kakao, Kahve & Sümbülteber • Extrait', fragranticaRef: 'Carolina Herrera Good Girl', gender: 'Kadın', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Yüksek',
+    bottleColor: '#1E1B4B', liquidColor: '#FBCFE8', rating: 4.8, reviewsCount: 189,
+    notes: [{ name: 'Tonka Fasulyesi', percent: 95 }, { name: 'Kakao', percent: 92 }, { name: 'Sümbülteber', percent: 90 }, { name: 'Kahve', percent: 89 }, { name: 'Badem', percent: 88 }, { name: 'Yasemin', percent: 86 }]
+  },
+  {
+    id: 'frestin-110', code: 'F-10', name: 'Lost Cherry', subtitle: 'Likörlü Vişne & Acı Badem • Extrait', fragranticaRef: 'Tom Ford Lost Cherry', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Yüksek',
+    bottleColor: '#7F1D1D', liquidColor: '#FECDD3', rating: 4.9, reviewsCount: 158,
+    notes: [{ name: 'Vişne / Kiraz', percent: 98 }, { name: 'Acı Badem', percent: 95 }, { name: 'Likör', percent: 92 }, { name: 'Tonka Fasulyesi', percent: 88 }, { name: 'Peru Balsamı', percent: 85 }, { name: 'Tarçın', percent: 83 }]
+  },
+  {
+    id: 'frestin-111', code: 'F-11', name: 'Tobacco Vanille', subtitle: 'Zengin Tütün Yaprağı & Vanilya • Extrait', fragranticaRef: 'Tom Ford Tobacco Vanille', gender: 'Unisex', season: 'Kış', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#451A03', liquidColor: '#F59E0B', rating: 5.0, reviewsCount: 220,
+    notes: [{ name: 'Tütün Yaprağı', percent: 98 }, { name: 'Vanilya', percent: 96 }, { name: 'Kurutulmuş Meyveler', percent: 90 }, { name: 'Kakao', percent: 88 }, { name: 'Tonka Fasulyesi', percent: 87 }, { name: 'Baharatlar', percent: 85 }]
+  },
+  {
+    id: 'frestin-112', code: 'F-12', name: 'Black Orchid', subtitle: 'Karanlık & Lüks Çiçeksi • Extrait', fragranticaRef: 'Tom Ford Black Orchid', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#111827', liquidColor: '#701A75', rating: 4.8, reviewsCount: 151,
+    notes: [{ name: 'Trüf Mantarı', percent: 95 }, { name: 'Siyah Orkide', percent: 94 }, { name: 'Çikolata', percent: 90 }, { name: 'Paçuli', percent: 89 }, { name: 'Tütsü', percent: 86 }, { name: 'Ylang-Ylang', percent: 84 }]
+  },
+  {
+    id: 'frestin-113', code: 'F-13', name: 'Baccarat Rouge 540', subtitle: 'Kristal Safran & Ambergris • Extrait', fragranticaRef: 'Maison Francis Kurkdjian Baccarat Rouge 540', gender: 'Unisex', season: 'Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#991B1B', liquidColor: '#FEE2E2', rating: 5.0, reviewsCount: 340,
+    notes: [{ name: 'Safran', percent: 98 }, { name: 'Acı Badem', percent: 94 }, { name: 'Yasemin', percent: 92 }, { name: 'Ambergris', percent: 95 }, { name: 'Sedir Ağacı', percent: 90 }, { name: 'Misk', percent: 88 }]
+  },
+  {
+    id: 'frestin-114', code: 'F-14', name: 'Kirke', subtitle: 'Egzotik Meyve Fırtınası • Extrait', fragranticaRef: 'Tiziana Terenzi Kirke', gender: 'Unisex', season: 'Yaz / Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#B45309', liquidColor: '#FEF08A', rating: 4.9, reviewsCount: 215,
+    notes: [{ name: 'Çarkıfelek Meyvesi', percent: 98 }, { name: 'Şeftali', percent: 95 }, { name: 'Armut', percent: 93 }, { name: 'Ahududu', percent: 91 }, { name: 'Misk', percent: 94 }, { name: 'Vanilya', percent: 87 }]
+  },
+  {
+    id: 'frestin-115', code: 'F-15', name: 'Delina Exclusif', subtitle: 'Türk Gülü, Litchi & Tütsü • Extrait', fragranticaRef: 'Parfums de Marly Delina', gender: 'Kadın', season: 'İlkbahar / Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#BE185D', liquidColor: '#FBCFE8', rating: 4.9, reviewsCount: 192,
+    notes: [{ name: 'Türk Gülü', percent: 98 }, { name: 'Litchi', percent: 95 }, { name: 'Ravent (Rhubarb)', percent: 92 }, { name: 'Şakayık', percent: 90 }, { name: 'Vanilya', percent: 89 }, { name: 'Beyaz Misk', percent: 88 }]
+  },
+  {
+    id: 'frestin-116', code: 'F-16', name: 'Erba Pura', subtitle: 'Akdeniz Narenciyesi & Beyaz Misk • Extrait', fragranticaRef: 'Xerjoff Erba Pura', gender: 'Unisex', season: 'Yaz / İlkbahar', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#0284C7', liquidColor: '#BAE6FD', rating: 4.9, reviewsCount: 178,
+    notes: [{ name: 'Sicilya Portakalı', percent: 96 }, { name: 'Kalabriya Bergamotu', percent: 94 }, { name: 'Tropikal Meyveler', percent: 95 }, { name: 'Beyaz Misk', percent: 92 }, { name: 'Amber', percent: 90 }, { name: 'Madagaskar Vanilyası', percent: 89 }]
+  },
+  {
+    id: 'frestin-117', code: 'F-17', name: 'Naxos', subtitle: 'Sicilya Balı, Tütün & Lavanta • Extrait', fragranticaRef: 'Xerjoff XJ 1861 Naxos', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#92400E', liquidColor: '#FDE047', rating: 5.0, reviewsCount: 245,
+    notes: [{ name: 'Bal', percent: 98 }, { name: 'Tütün Yaprağı', percent: 96 }, { name: 'Lavanta', percent: 93 }, { name: 'Tarçın', percent: 91 }, { name: 'Vanilya', percent: 90 }, { name: 'Bergamot', percent: 88 }]
+  },
+  {
+    id: 'frestin-118', code: 'F-18', name: 'Layton', subtitle: 'Karizmatik Elma, Kakule & Vanilya • Extrait', fragranticaRef: 'Parfums de Marly Layton', gender: 'Erkek', season: 'Kış / Sonbahar / İlkbahar', time: 'Gece / Özel Gün', sillage: 'Yüksek',
+    bottleColor: '#1E3A8A', liquidColor: '#93C5FD', rating: 4.9, reviewsCount: 225,
+    notes: [{ name: 'Elma', percent: 96 }, { name: 'Vanilya', percent: 94 }, { name: 'Kakule', percent: 93 }, { name: 'Lavanta', percent: 90 }, { name: 'Karabiber', percent: 87 }, { name: 'Guaiac Ağacı', percent: 86 }]
+  },
+  {
+    id: 'frestin-119', code: 'F-19', name: 'Ganymede', subtitle: 'Mineral Süet, Safran & Mandarin • Extrait', fragranticaRef: 'Marc-Antoine Barrois Ganymede', gender: 'Unisex', season: 'Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#854D0E', liquidColor: '#FEF9C3', rating: 4.9, reviewsCount: 164,
+    notes: [{ name: 'Mineral Notalar', percent: 98 }, { name: 'Süet / Deri', percent: 95 }, { name: 'Safran', percent: 94 }, { name: 'Akigalawood', percent: 92 }, { name: 'İtalyan Mandalinası', percent: 89 }, { name: 'Menekşe Yaprağı', percent: 87 }]
+  },
+  {
+    id: 'frestin-120', code: 'F-20', name: 'Angels\' Share', subtitle: 'Meşe Fıçıda Konyak, Tarçın & Pralin • Extrait', fragranticaRef: 'Kilian Angels\' Share', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#78350F', liquidColor: '#F59E0B', rating: 5.0, reviewsCount: 277,
+    notes: [{ name: 'Konyak', percent: 98 }, { name: 'Tarçın', percent: 96 }, { name: 'Tonka Fasulyesi', percent: 94 }, { name: 'Pralin', percent: 92 }, { name: 'Meşe', percent: 90 }, { name: 'Vanilya', percent: 89 }]
+  },
+  {
+    id: 'frestin-121', code: 'F-21', name: 'Hacivat', subtitle: 'Asil Ananas, Greyfurt & Meşe Yosunu • Extrait', fragranticaRef: 'Nishane Hacivat', gender: 'Unisex', season: 'Yaz / İlkbahar / Dört Mevsim', time: 'Gündüz / Ofis', sillage: 'Çok Yüksek',
+    bottleColor: '#065F46', liquidColor: '#A7F3D0', rating: 4.9, reviewsCount: 238,
+    notes: [{ name: 'Ananas', percent: 97 }, { name: 'Greyfurt', percent: 95 }, { name: 'Meşe Yosunu', percent: 94 }, { name: 'Bergamot', percent: 92 }, { name: 'Sedir Ağacı', percent: 89 }, { name: 'Paçuli', percent: 87 }]
+  },
+  {
+    id: 'frestin-122', code: 'F-22', name: 'Ani', subtitle: 'Baharatlı Zencefil & Kremsi Vanilya • Extrait', fragranticaRef: 'Nishane Ani', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#14532D', liquidColor: '#FDE047', rating: 4.9, reviewsCount: 152,
+    notes: [{ name: 'Vanilya', percent: 98 }, { name: 'Mavi Zencefil', percent: 95 }, { name: 'Kakule', percent: 93 }, { name: 'Bergamot', percent: 89 }, { name: 'Benzoin', percent: 88 }, { name: 'Sandal Ağacı', percent: 86 }]
+  },
+  {
+    id: 'frestin-123', code: 'F-23', name: 'Oud For Greatness', subtitle: 'Mistik Oud, Safran & Muskat • Extrait', fragranticaRef: 'Initio Oud For Greatness', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#171717', liquidColor: '#FBBF24', rating: 4.9, reviewsCount: 185,
+    notes: [{ name: 'Oud (Öd Ağacı)', percent: 98 }, { name: 'Safran', percent: 96 }, { name: 'Küçük Hindistan Cevizi (Muskat)', percent: 92 }, { name: 'Lavanta', percent: 89 }, { name: 'Paçuli', percent: 88 }, { name: 'Misk', percent: 87 }]
+  },
+  {
+    id: 'frestin-124', code: 'F-24', name: 'Side Effect', subtitle: 'Rom, Tütün, Vanilya & Tarçın • Extrait', fragranticaRef: 'Initio Side Effect', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#4C0519', liquidColor: '#FDA4AF', rating: 5.0, reviewsCount: 196,
+    notes: [{ name: 'Rom', percent: 97 }, { name: 'Tütün Yaprağı', percent: 96 }, { name: 'Vanilya', percent: 95 }, { name: 'Tarçın', percent: 93 }, { name: 'Safran', percent: 89 }, { name: 'Sandal Ağacı', percent: 86 }]
+  },
+  {
+    id: 'frestin-125', code: 'F-25', name: 'Ombré Leather', subtitle: 'Siyah Deri, Kakule & Yasemin • Extrait', fragranticaRef: 'Tom Ford Ombré Leather', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Yüksek',
+    bottleColor: '#1C1917', liquidColor: '#D97706', rating: 4.9, reviewsCount: 182,
+    notes: [{ name: 'Deri', percent: 98 }, { name: 'Kakule', percent: 94 }, { name: 'Yasemin Sambac', percent: 90 }, { name: 'Paçuli', percent: 88 }, { name: 'Amber', percent: 87 }, { name: 'Meşe Yosunu', percent: 85 }]
+  },
+  {
+    id: 'frestin-126', code: 'F-26', name: 'Imagination', subtitle: 'Seylan Çayı, Sicilya Narenciyesi & Zencefil • Extrait', fragranticaRef: 'Louis Vuitton Imagination', gender: 'Erkek', season: 'Yaz / İlkbahar / Dört Mevsim', time: 'Gündüz', sillage: 'Yüksek',
+    bottleColor: '#0284C7', liquidColor: '#E0F2FE', rating: 5.0, reviewsCount: 210,
+    notes: [{ name: 'Çin Siyah Çayı', percent: 97 }, { name: 'Kalabriya Bergamotu', percent: 96 }, { name: 'Nijerya Zencefili', percent: 93 }, { name: 'Ambroxan', percent: 92 }, { name: 'Portakal', percent: 90 }, { name: 'Neroli', percent: 89 }]
+  },
+  {
+    id: 'frestin-127', code: 'F-27', name: 'Ombre Nomade', subtitle: 'Kraliyet Oudu, Tütsü, Ahududu & Gül • Extrait', fragranticaRef: 'Louis Vuitton Ombre Nomade', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#3B0764', liquidColor: '#F3E8FF', rating: 5.0, reviewsCount: 189,
+    notes: [{ name: 'Oud (Öd Ağacı)', percent: 98 }, { name: 'Tütsü', percent: 96 }, { name: 'Ahududu', percent: 94 }, { name: 'Gül', percent: 92 }, { name: 'Safran', percent: 90 }, { name: 'Huş Ağacı', percent: 88 }]
+  },
+  {
+    id: 'frestin-128', code: 'F-28', name: 'Stronger With You Intensely', subtitle: 'Karamelize Kestane, Vanilya & Tarçın • Extrait', fragranticaRef: 'Emporio Armani Stronger With You Intensely', gender: 'Erkek', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#7C2D12', liquidColor: '#FDBA74', rating: 4.9, reviewsCount: 240,
+    notes: [{ name: 'Toffee / Karamel', percent: 97 }, { name: 'Tarçın', percent: 95 }, { name: 'Vanilya', percent: 94 }, { name: 'Kestane', percent: 93 }, { name: 'Tonka Fasulyesi', percent: 90 }, { name: 'Süet / Deri', percent: 86 }]
+  },
+  {
+    id: 'frestin-129', code: 'F-29', name: 'Le Male Elixir', subtitle: 'Altın Bal, Tütün, Lavanta & Nane • Extrait', fragranticaRef: 'Jean Paul Gaultier Le Male Elixir', gender: 'Erkek', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#B45309', liquidColor: '#FEF08A', rating: 5.0, reviewsCount: 265,
+    notes: [{ name: 'Bal', percent: 97 }, { name: 'Vanilya', percent: 96 }, { name: 'Tütün Yaprağı', percent: 94 }, { name: 'Lavanta', percent: 93 }, { name: 'Tonka Fasulyesi', percent: 92 }, { name: 'Nane', percent: 89 }]
+  },
+  {
+    id: 'frestin-130', code: 'F-30', name: 'La Belle', subtitle: 'Karamelize Yeşil Armut & Vanilya • Extrait', fragranticaRef: 'Jean Paul Gaultier La Belle', gender: 'Kadın', season: 'Kış / Sonbahar / Dört Mevsim', time: 'Gece', sillage: 'Yüksek',
+    bottleColor: '#881337', liquidColor: '#FECDD3', rating: 4.9, reviewsCount: 175,
+    notes: [{ name: 'Armut', percent: 98 }, { name: 'Vanilya', percent: 96 }, { name: 'Vetiver', percent: 90 }, { name: 'Bergamot', percent: 88 }, { name: 'Amber', percent: 87 }, { name: 'Misk', percent: 85 }]
+  },
+  {
+    id: 'frestin-131', code: 'F-31', name: 'Paradoxe', subtitle: 'Neroli, Beyaz Çiçekler & Bourbon Vanilya • Extrait', fragranticaRef: 'Prada Paradoxe', gender: 'Kadın', season: 'Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Yüksek',
+    bottleColor: '#BE123C', liquidColor: '#FFE4E6', rating: 4.9, reviewsCount: 198,
+    notes: [{ name: 'Armut', percent: 94 }, { name: 'Portakal Çiçeği', percent: 96 }, { name: 'Neroli', percent: 95 }, { name: 'Bourbon Vanilya', percent: 93 }, { name: 'Amber', percent: 91 }, { name: 'Beyaz Misk', percent: 89 }]
+  },
+  {
+    id: 'frestin-132', code: 'F-32', name: 'Black Opium', subtitle: 'Siyah Kahve, Vanilya & Beyaz Çiçekler • Extrait', fragranticaRef: 'Yves Saint Laurent Black Opium', gender: 'Kadın', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Yüksek',
+    bottleColor: '#18181B', liquidColor: '#F5D0FE', rating: 4.8, reviewsCount: 230,
+    notes: [{ name: 'Kahve', percent: 98 }, { name: 'Vanilya', percent: 96 }, { name: 'Armut', percent: 90 }, { name: 'Portakal Çiçeği', percent: 89 }, { name: 'Pembe Biber', percent: 87 }, { name: 'Paçuli', percent: 86 }]
+  },
+  {
+    id: 'frestin-133', code: 'F-33', name: 'Coco Mademoiselle', subtitle: 'Zarif Portakal, Gül & Paçuli • Extrait', fragranticaRef: 'Chanel Coco Mademoiselle', gender: 'Kadın', season: 'Dört Mevsim', time: 'Gündüz / Ofis', sillage: 'Yüksek',
+    bottleColor: '#D97706', liquidColor: '#FDE68A', rating: 4.9, reviewsCount: 254,
+    notes: [{ name: 'Portakal', percent: 96 }, { name: 'Paçuli', percent: 95 }, { name: 'Türk Gülü', percent: 93 }, { name: 'Bergamot', percent: 92 }, { name: 'Yasemin', percent: 90 }, { name: 'Vanilya', percent: 88 }]
+  },
+  {
+    id: 'frestin-134', code: 'F-34', name: 'Hypnotic Poison', subtitle: 'Büyüleyici Acı Badem, Hindistan Cevizi & Vanilya • Extrait', fragranticaRef: 'Dior Hypnotic Poison', gender: 'Kadın', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#7F1D1D', liquidColor: '#FCA5A5', rating: 4.9, reviewsCount: 212,
+    notes: [{ name: 'Vanilya', percent: 98 }, { name: 'Acı Badem', percent: 96 }, { name: 'Hindistan Cevizi', percent: 92 }, { name: 'Erik', percent: 89 }, { name: 'Sümbülteber', percent: 88 }, { name: 'Sandal Ağacı', percent: 87 }]
+  },
+  {
+    id: 'frestin-135', code: 'F-35', name: 'Black Afgano', subtitle: 'Karanlık Kenevir, Reçine, Kahve & Oud • Extrait', fragranticaRef: 'Nasomatto Black Afgano', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#09090B', liquidColor: '#3F3F46', rating: 4.9, reviewsCount: 168,
+    notes: [{ name: 'Esrar / Kenevir Notaları', percent: 98 }, { name: 'Oud (Öd Ağacı)', percent: 96 }, { name: 'Tütsü', percent: 95 }, { name: 'Kahve', percent: 93 }, { name: 'Tütün Yaprağı', percent: 91 }, { name: 'Reçine', percent: 90 }]
+  },
+  {
+    id: 'frestin-136', code: 'F-36', name: 'Megamare', subtitle: 'Fırtınalı Okyanus, Deniz Yosunu & Ambroxan • Extrait', fragranticaRef: 'Orto Parisi Megamare', gender: 'Unisex', season: 'Yaz / Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#164E63', liquidColor: '#A5F3FC', rating: 4.9, reviewsCount: 194,
+    notes: [{ name: 'Deniz Notaları', percent: 99 }, { name: 'Deniz Yosunu', percent: 96 }, { name: 'Ambroxan', percent: 95 }, { name: 'Tuzlu Mineral Notalar', percent: 94 }, { name: 'Bergamot', percent: 89 }, { name: 'Misk', percent: 88 }]
+  },
+  {
+    id: 'frestin-137', code: 'F-37', name: 'Portrait of a Lady', subtitle: 'Görkemli Türk Gülü, Tütsü, Karanfil & Paçuli • Extrait', fragranticaRef: 'Frederic Malle Portrait of a Lady', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece / Özel Gün', sillage: 'Çok Yüksek',
+    bottleColor: '#450A0A', liquidColor: '#FECACA', rating: 5.0, reviewsCount: 147,
+    notes: [{ name: 'Türk Gülü', percent: 98 }, { name: 'Paçuli', percent: 95 }, { name: 'Tütsü', percent: 94 }, { name: 'Ahududu', percent: 91 }, { name: 'Karanfil', percent: 90 }, { name: 'Sandal Ağacı', percent: 88 }]
+  },
+  {
+    id: 'frestin-138', code: 'F-38', name: 'Santal 33', subtitle: 'İkonik Avustralya Sandal Ağacı, Deri & Kakule • Extrait', fragranticaRef: 'Le Labo Santal 33', gender: 'Unisex', season: 'Dört Mevsim', time: 'Gündüz / Ofis', sillage: 'Yüksek',
+    bottleColor: '#57534E', liquidColor: '#E7E5E4', rating: 4.8, reviewsCount: 162,
+    notes: [{ name: 'Sandal Ağacı', percent: 98 }, { name: 'Deri', percent: 95 }, { name: 'Papirüs', percent: 93 }, { name: 'Virginia Sediri', percent: 91 }, { name: 'Kakule', percent: 89 }, { name: 'Menekşe', percent: 87 }]
+  },
+  {
+    id: 'frestin-139', code: 'F-39', name: 'Gypsy Water', subtitle: 'Çam İğneleri, Ardıç Meyvesi, Tütsü & Vanilya • Extrait', fragranticaRef: 'Byredo Gypsy Water', gender: 'Unisex', season: 'İlkbahar / Yaz / Dört Mevsim', time: 'Gündüz', sillage: 'Orta - Yüksek',
+    bottleColor: '#27272A', liquidColor: '#FAFAFA', rating: 4.8, reviewsCount: 143,
+    notes: [{ name: 'Ardıç Meyvesi', percent: 95 }, { name: 'Çam İğnesi', percent: 94 }, { name: 'Vanilya', percent: 92 }, { name: 'Sandal Ağacı', percent: 91 }, { name: 'Bergamot', percent: 89 }, { name: 'Tütsü', percent: 88 }]
+  },
+  {
+    id: 'frestin-140', code: 'F-40', name: 'Jazz Club', subtitle: 'Brooklyn Caz Kulübü: Rom, Puro Tütünü & Vanilya • Extrait', fragranticaRef: 'Maison Margiela Replica Jazz Club', gender: 'Erkek', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Yüksek',
+    bottleColor: '#9A3412', liquidColor: '#FDBA74', rating: 4.9, reviewsCount: 159,
+    notes: [{ name: 'Rom', percent: 97 }, { name: 'Tütün Yaprağı', percent: 96 }, { name: 'Vanilya', percent: 94 }, { name: 'Pembe Biber', percent: 89 }, { name: 'Vetiver', percent: 87 }, { name: 'Portakal Çiçeği', percent: 85 }]
+  },
+  {
+    id: 'frestin-141', code: 'F-41', name: 'Grand Soir', subtitle: 'Paris Gecesi: Saf Kehribar, Benzoin & Vanilya • Extrait', fragranticaRef: 'Maison Francis Kurkdjian Grand Soir', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#B45309', liquidColor: '#FCD34D', rating: 5.0, reviewsCount: 183,
+    notes: [{ name: 'Amber', percent: 99 }, { name: 'Siam Benzoini', percent: 96 }, { name: 'Vanilya', percent: 95 }, { name: 'Tonka Fasulyesi', percent: 93 }, { name: 'İspanyol Labdanumu', percent: 91 }, { name: 'Lavanta', percent: 86 }]
+  },
+  {
+    id: 'frestin-142', code: 'F-42', name: 'Herod', subtitle: 'Kraliyet Tütünü, Tarçın, Osmanthus & Vanilya • Extrait', fragranticaRef: 'Parfums de Marly Herod', gender: 'Erkek', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Yüksek',
+    bottleColor: '#451A03', liquidColor: '#FDE68A', rating: 4.9, reviewsCount: 171,
+    notes: [{ name: 'Tütün Yaprağı', percent: 98 }, { name: 'Tarçın', percent: 95 }, { name: 'Vanilya', percent: 94 }, { name: 'Tütsü', percent: 90 }, { name: 'Osmanthus', percent: 88 }, { name: 'Sedir Ağacı', percent: 87 }]
+  },
+  {
+    id: 'frestin-143', code: 'F-43', name: 'Pegasus', subtitle: 'Metalik Acı Badem, Heliotrop & Vanilya • Extrait', fragranticaRef: 'Parfums de Marly Pegasus', gender: 'Erkek', season: 'Kış / Sonbahar / İlkbahar', time: 'Gündüz / Gece', sillage: 'Yüksek',
+    bottleColor: '#475569', liquidColor: '#F1F5F9', rating: 4.8, reviewsCount: 149,
+    notes: [{ name: 'Acı Badem', percent: 98 }, { name: 'Heliotrop', percent: 95 }, { name: 'Vanilya', percent: 93 }, { name: 'Sandal Ağacı', percent: 90 }, { name: 'Lavanta', percent: 88 }, { name: 'Kimyon', percent: 85 }]
+  },
+  {
+    id: 'frestin-144', code: 'F-44', name: 'Alexandria II', subtitle: 'Saray İhtişamı: Gül Ağacı, Lavanta, Elma & Laos Oudu • Extrait', fragranticaRef: 'Xerjoff Alexandria II', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece / Özel Gün', sillage: 'Çok Yüksek',
+    bottleColor: '#713F12', liquidColor: '#FEF08A', rating: 5.0, reviewsCount: 205,
+    notes: [{ name: 'Oud (Öd Ağacı)', percent: 97 }, { name: 'Lavanta', percent: 95 }, { name: 'Gül Ağacı', percent: 94 }, { name: 'Elma', percent: 92 }, { name: 'Tarçın', percent: 91 }, { name: 'Amber', percent: 90 }]
+  },
+  {
+    id: 'frestin-145', code: 'F-45', name: 'Lira', subtitle: 'İtalyan Limonlu Kek, Karamel & Kan Portakalı • Extrait', fragranticaRef: 'Xerjoff Casamorati Lira', gender: 'Kadın', season: 'Kış / Sonbahar', time: 'Gündüz / Gece', sillage: 'Yüksek',
+    bottleColor: '#A16207', liquidColor: '#FEF08A', rating: 4.9, reviewsCount: 187,
+    notes: [{ name: 'Karamel', percent: 98 }, { name: 'Kan Portakalı', percent: 95 }, { name: 'Vanilya', percent: 96 }, { name: 'Bergamot', percent: 92 }, { name: 'Tarçın', percent: 90 }, { name: 'Meyan Kökü', percent: 87 }]
+  },
+  {
+    id: 'frestin-146', code: 'F-46', name: 'Bianco Latte', subtitle: 'Sıcak Süt, Karamel, Beyaz Misk & Bal • Extrait', fragranticaRef: 'Giardini Di Toscana Bianco Latte', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#D6D3D1', liquidColor: '#FEF3C7', rating: 5.0, reviewsCount: 228,
+    notes: [{ name: 'Karamel', percent: 99 }, { name: 'Süt / Krema', percent: 97 }, { name: 'Bal', percent: 95 }, { name: 'Vanilya', percent: 96 }, { name: 'Kumarin (Tonka)', percent: 92 }, { name: 'Beyaz Misk', percent: 90 }]
+  },
+  {
+    id: 'frestin-147', code: 'F-47', name: 'Khamrah', subtitle: 'Hurma, Tarçın, Pralin & Kavrulmuş Tonka • Extrait', fragranticaRef: 'Lattafa Khamrah', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#92400E', liquidColor: '#F59E0B', rating: 4.9, reviewsCount: 242,
+    notes: [{ name: 'Tarçın', percent: 97 }, { name: 'Hurma', percent: 96 }, { name: 'Pralin', percent: 95 }, { name: 'Vanilya', percent: 94 }, { name: 'Tonka Fasulyesi', percent: 92 }, { name: 'Mür Reçinesi', percent: 89 }]
+  },
+  {
+    id: 'frestin-148', code: 'F-48', name: 'Cedrat Boise', subtitle: 'Sicilya Limonu, Frenk Üzümü, Deri & Odunlar • Extrait', fragranticaRef: 'Mancera Cedrat Boise', gender: 'Unisex', season: 'Yaz / İlkbahar / Dört Mevsim', time: 'Gündüz', sillage: 'Yüksek',
+    bottleColor: '#CA8A04', liquidColor: '#FEF9C3', rating: 4.8, reviewsCount: 176,
+    notes: [{ name: 'Sicilya Limonu', percent: 97 }, { name: 'Siyah Frenk Üzümü', percent: 95 }, { name: 'Sedir Ağacı', percent: 93 }, { name: 'Deri', percent: 91 }, { name: 'Meşe Yosunu', percent: 89 }, { name: 'Vanilya', percent: 87 }]
+  },
+  {
+    id: 'frestin-149', code: 'F-49', name: 'Roses Vanille', subtitle: 'Lokum, Türk Gülü, Şeker & Yoğun Vanilya • Extrait', fragranticaRef: 'Mancera Roses Vanille', gender: 'Kadın', season: 'Kış / Sonbahar / Dört Mevsim', time: 'Gündüz / Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#BE185D', liquidColor: '#FCE7F3', rating: 4.9, reviewsCount: 193,
+    notes: [{ name: 'Türk Gülü', percent: 98 }, { name: 'Vanilya', percent: 97 }, { name: 'Türk Lokumu', percent: 95 }, { name: 'Beyaz Misk', percent: 92 }, { name: 'Sedir Ağacı', percent: 88 }, { name: 'İtalyan Limonu', percent: 86 }]
+  },
+  {
+    id: 'frestin-150', code: 'F-50', name: 'Arabians Tonka', subtitle: 'Arap Oudu, Safran, Esmer Şeker & Tonka • Extrait', fragranticaRef: 'Montale Arabians Tonka', gender: 'Unisex', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#18181B', liquidColor: '#FDE047', rating: 5.0, reviewsCount: 256,
+    notes: [{ name: 'Tonka Fasulyesi', percent: 98 }, { name: 'Esmer Şeker', percent: 96 }, { name: 'Oud (Öd Ağacı)', percent: 95 }, { name: 'Safran', percent: 94 }, { name: 'Bulgar Gülü', percent: 92 }, { name: 'Amber', percent: 90 }]
+  },
+  {
+    id: 'frestin-151', code: 'F-51', name: 'My Way', subtitle: 'Mısır Portakal Çiçeği, Hint Sümbülteberi & Vanilya • Extrait', fragranticaRef: 'Giorgio Armani My Way', gender: 'Kadın', season: 'İlkbahar / Yaz', time: 'Gündüz', sillage: 'Yüksek',
+    bottleColor: '#DB2777', liquidColor: '#FBCFE8', rating: 4.8, reviewsCount: 167,
+    notes: [{ name: 'Portakal Çiçeği', percent: 97 }, { name: 'Sümbülteber', percent: 96 }, { name: 'Yasemin', percent: 93 }, { name: 'Bergamot', percent: 91 }, { name: 'Madagaskar Vanilyası', percent: 89 }, { name: 'Beyaz Misk', percent: 88 }]
+  },
+  {
+    id: 'frestin-152', code: 'F-52', name: 'Scandal', subtitle: 'Kan Portakalı, Süzme Bal, Gardenya & Karamel • Extrait', fragranticaRef: 'Jean Paul Gaultier Scandal', gender: 'Kadın', season: 'Kış / Sonbahar', time: 'Gece', sillage: 'Çok Yüksek',
+    bottleColor: '#9D174D', liquidColor: '#F9A8D4', rating: 4.9, reviewsCount: 214,
+    notes: [{ name: 'Bal', percent: 98 }, { name: 'Kan Portakalı', percent: 95 }, { name: 'Karamel', percent: 94 }, { name: 'Paçuli', percent: 92 }, { name: 'Gardenya', percent: 90 }, { name: 'Şeftali', percent: 88 }]
   }
 ];
 
-const INITIAL_NOTE_CATEGORIES = [
-  'Bergamot', 'Limon', 'Portakal', 'Lavanta', 'Tarçın', 'Vanilya', 'Amber', 'Misk', 'Sedir Ağacı', 'Paçuli', 'Gül', 'Yasemin', 'Deri', 'Tütün', 'Karamel', 'Oud'
-];
-
-const getEstimatedShippingDate = () => {
-  const d = new Date();
-  d.setDate(d.getDate() + 20);
-  return d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+const FRAGRANTICA_NOTE_FAMILIES = {
+  'Tümü': [],
+  'Narenciye & Ferah': [
+    'Bergamot', 'Kalabriya Bergamotu', 'Limon', 'Sicilya Limonu', 'Limon Kabuğu', 'Portakal', 'Kan Portakalı',
+    'Sicilya Portakalı', 'Mandalina', 'Yeşil Mandalina', 'İtalyan Mandalinası', 'Greyfurt', 'Misket Limonu (Lime)',
+    'Yuzu', 'Neroli', 'Petitgrain', 'Mine Çiçeği (Verbena)', 'Ağaçkavunu (Citron)'
+  ],
+  'Meyveler & Egzotik': [
+    'Ananas', 'Elma', 'Yeşil Elma', 'Armut', 'Şeftali', 'Beyaz Şeftali', 'Vişne / Kiraz', 'Çarkıfelek Meyvesi',
+    'Ahududu', 'Siyah Frenk Üzümü', 'Çilek', 'Böğürtlen', 'Litchi', 'İncir', 'Hindistan Cevizi', 'Erik',
+    'Hurma', 'Tropikal Meyveler', 'Kurutulmuş Meyveler', 'Karpuz', 'Kavun', 'Mango', 'Nar', 'Ravent (Rhubarb)'
+  ],
+  'Çiçekler & Beyaz Çiçekler': [
+    'Gül', 'Türk Gülü', 'Bulgar Gülü', 'Şam Gülü', 'Yasemin', 'Hint Yasemini', 'Yasemin Sambac', 'Portakal Çiçeği',
+    'Lavanta', 'Sümbülteber', 'Orkide', 'Siyah Orkide', 'Şakayık', 'İris / Süsen', 'Menekşe', 'Menekşe Yaprağı',
+    'Ylang-Ylang', 'Manolya', 'Gardenya', 'Nilüfer', 'Yeşil Leylak', 'Heliotrop', 'Osmanthus', 'Frezya', 'Zambak', 'Mimoza'
+  ],
+  'Baharatlar & Aromatik': [
+    'Tarçın', 'Safran', 'Kakule', 'Zencefil', 'Mavi Zencefil', 'Nijerya Zencefili', 'Karabiber', 'Pembe Biber',
+    'Küçük Hindistan Cevizi (Muskat)', 'Karanfil', 'Kimyon', 'Yıldız Anason', 'Kişniş', 'Nane', 'Biberiye',
+    'Adaçayı', 'Kekik', 'Fesleğen', 'Ardıç Meyvesi', 'Çam İğnesi', 'Çin Siyah Çayı', 'Yeşil Çay', 'Mate Çayı', 'Meyan Kökü'
+  ],
+  'Gurme, Tatlı & İçecekler': [
+    'Vanilya', 'Bourbon Vanilya', 'Madagaskar Vanilyası', 'Karamel', 'Toffee / Karamel', 'Bal', 'Çikolata', 'Kakao',
+    'Kahve', 'Pralin', 'Acı Badem', 'Badem', 'Kestane', 'Fındık', 'Süt / Krema', 'Türk Lokumu', 'Esmer Şeker',
+    'Pamuk Şeker', 'Konyak', 'Rom', 'Viski', 'Likör', 'Şampanya'
+  ],
+  'Odunlar, Oud & Yosunlar': [
+    'Oud (Öd Ağacı)', 'Sandal Ağacı', 'Sedir Ağacı', 'Virginia Sediri', 'Paçuli', 'Vetiver', 'Huş Ağacı',
+    'Meşe Yosunu', 'Meşe', 'Guaiac Ağacı', 'Kaşmir Ağacı', 'Gül Ağacı', 'Akigalawood', 'Papirüs', 'Selvi',
+    'Çam', 'Bambu', 'Odunsu Notalar'
+  ],
+  'Amber, Misk, Deri & Reçineler': [
+    'Amber', 'Beyaz Amber', 'Ambergris', 'Ambroxan', 'Misk', 'Beyaz Misk', 'Tonka Fasulyesi', 'Kumarin (Tonka)',
+    'Deri', 'Süet / Deri', 'Tütün Yaprağı', 'Tütsü', 'Mür Reçinesi', 'Benzoin', 'Siam Benzoini', 'İspanyol Labdanumu',
+    'Peru Balsamı', 'Elemi', 'Reçine', 'Cashmeran', 'Iso E Super', 'Trüf Mantarı', 'Esrar / Kenevir Notaları',
+    'Deniz Notaları', 'Su Notaları', 'Deniz Yosunu', 'Tuzlu Mineral Notalar', 'Mineral Notalar', 'Barut'
+  ]
 };
 
 // ==========================================
 // FRESTIN LOGO BİLEŞENİ
 // ==========================================
 const FrestinBrandLogo = ({ size = 'md', showText = true }) => {
-  // Logo yüksekliği tam olarak yanındaki FRESTIN + PERFUME yazı bloğunun toplam yüksekliğiyle eşleşir
-  const dimensions =
-    size === 'lg'
-      ? { box: 'w-14 h-14 sm:w-16 sm:h-16', title: 'text-3xl sm:text-4xl', sub: 'text-[10px] sm:text-xs' }
-      : size === 'sm'
-      ? { box: 'w-8 h-8', title: 'text-lg', sub: 'text-[8px]' }
-      : { box: 'w-10 h-10 sm:w-11 sm:h-11', title: 'text-xl sm:text-2xl', sub: 'text-[9px] sm:text-[10px]' };
+  const dimensions = {
+    sm: { box: 'w-9 h-9', title: 'text-lg', sub: 'text-[8px]' },
+    md: { box: 'w-11 h-11', title: 'text-2xl', sub: 'text-[9.5px]' },
+    lg: { box: 'w-14 h-14', title: 'text-3xl', sub: 'text-[11px]' }
+  }[size] || { box: 'w-11 h-11', title: 'text-2xl', sub: 'text-[9.5px]' };
 
   return (
     <div className="inline-flex items-center gap-3 select-none">
@@ -258,14 +442,32 @@ const RealFrestinBottleCardSVG = ({ labelColor = '#6E1E26', borderColor = '#D5B0
 // ==========================================
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
+  const [catalog, setCatalog] = useState(INITIAL_CATALOG);
 
-  const [catalog] = useState(INITIAL_CATALOG);
+  // Fragrantica Tüm Notalar listesi (kullanıcı da yeni nota ekleyebilir)
+  const [customAddedNotes, setCustomAddedNotes] = useState([]);
+  const [activeNoteCategory, setActiveNoteCategory] = useState('Tümü');
+  const [noteSearchQuery, setNoteSearchQuery] = useState('');
 
-  const [selectedRefIds, setSelectedRefIds] = useState(['frestin-101', 'frestin-102']);
+  const [showAddCustomModal, setShowAddCustomModal] = useState(false);
+  const [customBrandName, setCustomBrandName] = useState('');
+  const [customFragranceName, setCustomFragranceName] = useState('');
+  const [customGender, setCustomGender] = useState('Unisex');
+  const [customNotesInput, setCustomNotesInput] = useState('');
+
+  const [selectedRefIds, setSelectedRefIds] = useState([INITIAL_CATALOG[12].id, INITIAL_CATALOG[3].id]);
   const [refSearchQuery, setRefSearchQuery] = useState('');
-  const [likedNotes, setLikedNotes] = useState(['Bergamot', 'Sedir Ağacı', 'Vanilya']);
+  const [refGenderFilter, setRefGenderFilter] = useState('Tümü');
+
+  const [likedNotes, setLikedNotes] = useState(['Safran', 'Vanilya', 'Amber']);
   const [dislikedNotes, setDislikedNotes] = useState([]);
   const [noteSelectionMode, setNoteSelectionMode] = useState('like');
+
+  // Kişiselleştirme Tercihleri
+  const [prefGender, setPrefGender] = useState('Tümü');
+  const [prefSeason, setPrefSeason] = useState('Tümü');
+  const [prefTime, setPrefTime] = useState('Tümü');
+  const [prefSillage, setPrefSillage] = useState('Tümü');
 
   const [selectedSizes, setSelectedSizes] = useState({});
   const [detailModalProduct, setDetailModalProduct] = useState(null);
@@ -273,13 +475,190 @@ export default function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
-  const [shopierRedirectModal, setShopierRedirectModal] = useState(null);
+
+  // Tüm notaların birleşik listesi
+  const allAvailableNotes = useMemo(() => {
+    const base = Object.values(FRAGRANTICA_NOTE_FAMILIES).flat();
+    return Array.from(new Set([...customAddedNotes, ...base]));
+  }, [customAddedNotes]);
+
+  const displayedNotes = useMemo(() => {
+    const source =
+      activeNoteCategory === 'Tümü'
+        ? allAvailableNotes
+        : [...customAddedNotes, ...(FRAGRANTICA_NOTE_FAMILIES[activeNoteCategory] || [])];
+    if (!noteSearchQuery.trim()) return source;
+    return allAvailableNotes.filter((n) => n.toLowerCase().includes(noteSearchQuery.toLowerCase()));
+  }, [activeNoteCategory, allAvailableNotes, customAddedNotes, noteSearchQuery]);
+
+  // Kullanıcının yazdığı özel notayı anında ekleme
+  const handleQuickAddNote = (noteText) => {
+    const clean = noteText.trim();
+    if (!clean) return;
+    if (!allAvailableNotes.some((n) => n.toLowerCase() === clean.toLowerCase())) {
+      setCustomAddedNotes((prev) => [clean, ...prev]);
+    }
+    if (noteSelectionMode === 'like') {
+      if (!likedNotes.includes(clean)) setLikedNotes((prev) => [...prev, clean]);
+      setDislikedNotes((prev) => prev.filter((n) => n !== clean));
+    } else {
+      if (!dislikedNotes.includes(clean)) setDislikedNotes((prev) => [...prev, clean]);
+      setLikedNotes((prev) => prev.filter((n) => n !== clean));
+    }
+    setNoteSearchQuery('');
+    setToastMessage(`"${clean}" notası ${noteSelectionMode === 'like' ? 'sevdiğiniz' : 'istemediğiniz'} notalara eklendi!`);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  // Kullanıcının arama kutusuna yazdığı parfümü tek tıkla eklemesi
+  const handleQuickAddPerfumeFromSearch = (rawQuery) => {
+    const clean = rawQuery.trim();
+    if (!clean) return;
+    const newId = `custom-${Date.now()}`;
+    const newProduct = {
+      id: newId,
+      code: `F-ÖZEL`,
+      name: clean,
+      subtitle: `${prefGender === 'Tümü' ? 'Unisex' : prefGender} • Özel Fragrantica Eşleşmesi`,
+      fragranticaRef: clean,
+      gender: prefGender === 'Tümü' ? 'Unisex' : prefGender,
+      season: prefSeason === 'Tümü' ? 'Dört Mevsim' : prefSeason,
+      time: prefTime === 'Tümü' ? 'Gündüz / Gece' : prefTime,
+      sillage: 'Çok Yüksek',
+      bottleColor: '#7C1D1D',
+      liquidColor: '#F0D4A3',
+      rating: 5.0,
+      reviewsCount: 12,
+      notes: likedNotes.length > 0 ? likedNotes.slice(0, 4).map((n) => ({ name: n, percent: 95 })) : [{ name: 'Özel Esans Harmanı', percent: 96 }]
+    };
+    setCatalog((prev) => [newProduct, ...prev]);
+    setSelectedRefIds((prev) => [newId, ...prev]);
+    setRefSearchQuery('');
+    setToastMessage(`"${clean}" Fragrantica referans listenize eklendi ve eşleştirildi!`);
+    setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  const handleAddCustomPerfume = (e) => {
+    e.preventDefault();
+    if (!customFragranceName.trim()) return;
+    const fullName = customBrandName.trim() ? `${customBrandName.trim()} ${customFragranceName.trim()}` : customFragranceName.trim();
+    const newId = `custom-${Date.now()}`;
+    const parsedNotes = customNotesInput
+      ? customNotesInput
+          .split(',')
+          .map((n) => n.trim())
+          .filter(Boolean)
+      : [];
+
+    if (parsedNotes.length > 0) {
+      setCustomAddedNotes((prev) => Array.from(new Set([...parsedNotes, ...prev])));
+      setLikedNotes((prev) => Array.from(new Set([...prev, ...parsedNotes])));
+    }
+
+    const newProduct = {
+      id: newId,
+      code: `F-${catalog.length + 1}`,
+      name: customFragranceName.trim(),
+      subtitle: `${customGender} • Extrait de Parfum`,
+      fragranticaRef: fullName,
+      gender: customGender,
+      season: 'Dört Mevsim',
+      time: 'Gündüz / Gece',
+      sillage: 'Çok Yüksek',
+      bottleColor: '#7C1D1D',
+      liquidColor: '#F0D4A3',
+      rating: 5.0,
+      reviewsCount: 1,
+      notes: parsedNotes.length > 0 ? parsedNotes.map((n) => ({ name: n, percent: 95 })) : [{ name: 'Özel Nota', percent: 95 }]
+    };
+    setCatalog([newProduct, ...catalog]);
+    setSelectedRefIds([newId, ...selectedRefIds]);
+    setShowAddCustomModal(false);
+    setCustomBrandName('');
+    setCustomFragranceName('');
+    setCustomNotesInput('');
+    setToastMessage(`"${fullName}" parfümü ve notaları başarıyla eklendi!`);
+    setTimeout(() => setToastMessage(null), 4000);
+  };
+
+  // Akıllı Parfüm Eşleştirme Motoru
+  const matchedPerfumes = useMemo(() => {
+    const selectedRefObjects = catalog.filter((c) => selectedRefIds.includes(c.id));
+    const refNotesSet = new Set(
+      selectedRefObjects.flatMap((p) => p.notes.map((n) => n.name.toLowerCase()))
+    );
+
+    return catalog
+      .map((item) => {
+        let score = 68;
+        const itemNoteNames = item.notes.map((n) => n.name.toLowerCase());
+        const matchedNotePills = [];
+
+        // 1. Seçilen referans parfümlerden biri mi?
+        if (selectedRefIds.includes(item.id)) {
+          score += 26;
+        }
+
+        // 2. Referans parfümlerle ortak notalar
+        item.notes.forEach((n) => {
+          if (refNotesSet.has(n.name.toLowerCase())) {
+            score += 5;
+            matchedNotePills.push(n.name);
+          }
+        });
+
+        // 3. Kullanıcının sevdiği notalar
+        likedNotes.forEach((liked) => {
+          const likedLow = liked.toLowerCase();
+          if (itemNoteNames.some((inote) => inote.includes(likedLow) || likedLow.includes(inote))) {
+            score += 9;
+            if (!matchedNotePills.includes(liked)) matchedNotePills.push(liked);
+          }
+        });
+
+        // 4. Kullanıcının istemediği notalar (Ceza puanı)
+        let hasDisliked = false;
+        dislikedNotes.forEach((dis) => {
+          const disLow = dis.toLowerCase();
+          if (itemNoteNames.some((inote) => inote.includes(disLow) || disLow.includes(inote))) {
+            score -= 35;
+            hasDisliked = true;
+          }
+        });
+
+        // 5. Kişiselleştirme filtreleri (Cinsiyet, Mevsim, Zaman, Yoğunluk)
+        if (prefGender !== 'Tümü') {
+          if (item.gender === prefGender) score += 6;
+          else if (item.gender === 'Unisex') score += 2;
+          else score -= 18;
+        }
+        if (prefSeason !== 'Tümü' && item.season) {
+          if (item.season.includes(prefSeason) || item.season.includes('Dört Mevsim')) score += 5;
+          else score -= 8;
+        }
+        if (prefTime !== 'Tümü' && item.time) {
+          if (item.time.includes(prefTime)) score += 4;
+        }
+        if (prefSillage !== 'Tümü' && item.sillage) {
+          if (item.sillage.includes(prefSillage)) score += 4;
+        }
+
+        const finalMatch = Math.max(45, Math.min(99, Math.round(score)));
+        return {
+          ...item,
+          calculatedMatch: finalMatch,
+          matchedNotePills: Array.from(new Set(matchedNotePills)),
+          hasDisliked
+        };
+      })
+      .sort((a, b) => b.calculatedMatch - a.calculatedMatch);
+  }, [catalog, selectedRefIds, likedNotes, dislikedNotes, prefGender, prefSeason, prefTime, prefSillage]);
 
   const getSelectedSize = (productId) => selectedSizes[productId] || '50ml';
   const setSelectedSize = (productId, size) => setSelectedSizes((prev) => ({ ...prev, [productId]: size }));
 
   const addToCart = (product, size) => {
-    const price = product.customPrice || (size === '100ml' ? PRICE_100ML : PRICE_50ML);
+    const price = size === '100ml' ? PRICE_100ML : PRICE_50ML;
     const cartItemId = `${product.id}-${size}`;
     const existing = cart.find((i) => i.cartItemId === cartItemId);
     if (existing) {
@@ -300,8 +679,7 @@ export default function App() {
   };
 
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.qty, 0), [cart]);
-  const cartSubtotal = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.qty, 0), [cart]);
-  const cartTotal = cartSubtotal;
+  const cartTotal = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.qty, 0), [cart]);
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1E1E1C] flex flex-col font-sans selection:bg-[#E6482E] selection:text-white">
@@ -312,10 +690,10 @@ export default function App() {
             <FrestinBrandLogo size="md" showText={true} />
           </button>
 
-          <nav className="hidden lg:flex items-center bg-[#F3EFE6] p-1.5 rounded-full border border-[#E6E0D6]">
+          <nav className="hidden lg:flex items-center bg-[#F3EFE6] p-1.5 rounded-full border border-[#E6E0D6] gap-1">
             <button
               onClick={() => setActiveTab('home')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'home' ? 'bg-[#1E1E1C] text-[#FAF7F2] shadow-sm' : 'text-[#5A5751] hover:text-[#1E1E1C]'
               }`}
             >
@@ -323,40 +701,27 @@ export default function App() {
             </button>
             <button
               onClick={() => setActiveTab('finder')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                activeTab === 'finder' ? 'bg-[#1E1E1C] text-[#FAF7F2] shadow-sm' : 'text-[#5A5751] hover:text-[#1E1E1C]'
+              className={`relative flex items-center gap-2.5 px-6 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                activeTab === 'finder'
+                  ? 'bg-gradient-to-r from-[#B45309] via-[#D97706] to-[#EA580C] text-white shadow-lg shadow-[#EA580C]/30 ring-2 ring-[#FDE68A]'
+                  : 'bg-gradient-to-r from-[#FEF3C7] via-[#FDE68A] to-[#FFEDD5] text-[#78350F] hover:brightness-95 border border-[#F59E0B]/40 shadow-xs'
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#D99B72]" />
+              <Sparkles className={`w-4 h-4 ${activeTab === 'finder' ? 'text-[#FEF08A] animate-pulse' : 'text-[#D97706]'}`} />
               <span>Parfümünü Bul</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#1E1E1C] text-[#FDE68A] font-extrabold tracking-wider uppercase">
+                Fragrantica AI
+              </span>
             </button>
             <button
               onClick={() => setActiveTab('instock')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'instock' ? 'bg-[#4A7C59] text-white shadow-sm' : 'text-[#4A7C59] hover:bg-[#4A7C59]/10'
               }`}
             >
               <Zap className="w-3.5 h-3.5 fill-current" />
               <span>Stoklu Ürünlerimiz</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E9C46A] text-[#1E1E1C] font-bold">Hemen Teslim</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('store')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                activeTab === 'store' ? 'bg-[#1E1E1C] text-[#FAF7F2] shadow-sm' : 'text-[#5A5751] hover:text-[#1E1E1C]'
-              }`}
-            >
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span>Tüm Parfümler ({catalog.length}+)</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('process')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                activeTab === 'process' ? 'bg-[#1E1E1C] text-[#FAF7F2] shadow-sm' : 'text-[#5A5751] hover:text-[#1E1E1C]'
-              }`}
-            >
-              <Clock className="w-3.5 h-3.5 text-[#B86B43]" />
-              <span>Üretim & Teslimat</span>
             </button>
           </nav>
 
@@ -365,15 +730,14 @@ export default function App() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 bg-gradient-to-r from-[#833AB4]/10 via-[#FD1D1D]/10 to-[#FCB045]/10 hover:from-[#833AB4] hover:to-[#FCB045] text-[#1E1E1C] hover:text-white border border-[#DED8CE] px-3.5 py-2 rounded-full text-xs font-bold transition-all"
-              title="Instagram'da Bizi Takip Edin"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-[#833AB4]/10 via-[#FD1D1D]/10 to-[#FCB045]/10 text-[#1E1E1C] border border-[#DED8CE] px-3.5 py-2 rounded-full text-xs font-bold transition-all"
             >
               <Instagram className="w-4 h-4 text-[#C13584]" />
               <span className="hidden sm:inline">@frestin_perfumes</span>
             </a>
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative flex items-center gap-2 bg-white hover:bg-[#F3EFE6] text-[#1E1E1C] border border-[#DED8CE] px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all shadow-sm"
+              className="relative flex items-center gap-2 bg-white text-[#1E1E1C] border border-[#DED8CE] px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all shadow-sm"
             >
               <ShoppingBag className="w-4 h-4 text-[#B86B43]" />
               <span className="hidden sm:inline">Sepetim</span>
@@ -385,10 +749,10 @@ export default function App() {
         </div>
 
         {/* Mobil Sekmeler */}
-        <div className="flex lg:hidden border-t border-[#E6E0D6] bg-[#F3EFE6] px-2 py-1.5 gap-1 overflow-x-auto">
+        <div className="flex lg:hidden border-t border-[#E6E0D6] bg-[#F3EFE6] px-2 py-1.5 gap-1.5 overflow-x-auto">
           <button
             onClick={() => setActiveTab('home')}
-            className={`flex-1 py-2 px-2 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 whitespace-nowrap ${
+            className={`flex-1 py-2.5 px-3 rounded-xl text-[11px] font-semibold flex items-center justify-center gap-1 whitespace-nowrap ${
               activeTab === 'home' ? 'bg-[#1E1E1C] text-white' : 'text-[#5A5751]'
             }`}
           >
@@ -396,35 +760,22 @@ export default function App() {
           </button>
           <button
             onClick={() => setActiveTab('finder')}
-            className={`flex-1 py-2 px-2 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 whitespace-nowrap ${
-              activeTab === 'finder' ? 'bg-[#1E1E1C] text-white' : 'text-[#5A5751]'
+            className={`flex-1 py-2.5 px-3 rounded-xl text-[11px] font-extrabold flex items-center justify-center gap-1.5 whitespace-nowrap shadow-sm ${
+              activeTab === 'finder'
+                ? 'bg-gradient-to-r from-[#B45309] via-[#D97706] to-[#EA580C] text-white ring-1 ring-[#FDE68A]'
+                : 'bg-gradient-to-r from-[#FEF3C7] to-[#FDE68A] text-[#78350F] border border-[#F59E0B]/40'
             }`}
           >
-            <Sparkles className="w-3 h-3 text-[#D99B72]" /> Parfümünü Bul
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Parfümünü Bul</span>
           </button>
           <button
             onClick={() => setActiveTab('instock')}
-            className={`flex-1 py-2 px-2 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 whitespace-nowrap ${
+            className={`flex-1 py-2.5 px-3 rounded-xl text-[11px] font-semibold flex items-center justify-center gap-1 whitespace-nowrap ${
               activeTab === 'instock' ? 'bg-[#4A7C59] text-white' : 'text-[#4A7C59]'
             }`}
           >
-            <Zap className="w-3 h-3" /> Stoklu Ürünler
-          </button>
-          <button
-            onClick={() => setActiveTab('store')}
-            className={`flex-1 py-2 px-2 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 whitespace-nowrap ${
-              activeTab === 'store' ? 'bg-[#1E1E1C] text-white' : 'text-[#5A5751]'
-            }`}
-          >
-            <ShoppingBag className="w-3 h-3" /> Mağaza
-          </button>
-          <button
-            onClick={() => setActiveTab('process')}
-            className={`flex-1 py-2 px-2 rounded-lg text-[11px] font-semibold flex items-center justify-center gap-1 whitespace-nowrap ${
-              activeTab === 'process' ? 'bg-[#1E1E1C] text-white' : 'text-[#5A5751]'
-            }`}
-          >
-            <Clock className="w-3 h-3" /> Teslimat
+            Stoklu Ürünler
           </button>
         </div>
       </header>
@@ -439,14 +790,10 @@ export default function App() {
         </div>
       )}
 
-      {/* ================= İLGİ ÇEKİCİ AÇILIŞ SAYFASI (ANA SAYFA) ================= */}
+      {/* ================= ANA SAYFA ================= */}
       {activeTab === 'home' && (
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-          {/* HERO ALANI */}
           <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#191716] via-[#261D1A] to-[#3B231A] text-white shadow-2xl border border-[#E86F38]/25">
-            <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-to-br from-[#F52828]/20 to-[#F89843]/10 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-[#E86F38]/15 blur-3xl pointer-events-none" />
-
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-12 lg:p-16">
               <div className="lg:col-span-7 space-y-6">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-[#F89843] text-xs font-bold tracking-wider uppercase">
@@ -468,37 +815,21 @@ export default function App() {
                 <div className="flex flex-wrap items-center gap-3 pt-2">
                   <button
                     onClick={() => setActiveTab('instock')}
-                    className="px-6 py-4 rounded-2xl bg-gradient-to-r from-[#E62E2D] via-[#EF5B35] to-[#F7943C] hover:opacity-95 text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl transition-all cursor-pointer"
+                    className="px-6 py-4 rounded-2xl bg-gradient-to-r from-[#E62E2D] via-[#EF5B35] to-[#F7943C] text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl cursor-pointer"
                   >
                     <Zap className="w-4 h-4 fill-current" />
                     <span>Hemen Teslim Stoklu Parfümler</span>
                   </button>
                   <button
                     onClick={() => setActiveTab('finder')}
-                    className="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer"
+                    className="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs sm:text-sm font-bold flex items-center gap-2 cursor-pointer"
                   >
                     <Sparkles className="w-4 h-4 text-[#F89843]" />
                     <span>Kendi Parfümünü Bul</span>
                   </button>
                 </div>
-
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-lg">
-                  <div>
-                    <div className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#F89843]">%28</div>
-                    <div className="text-[11px] text-[#C8C2B8]">Saf Extrait Esans</div>
-                  </div>
-                  <div>
-                    <div className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#F89843]">1. Sınıf</div>
-                    <div className="text-[11px] text-[#C8C2B8]">Kristal Şişe & Valf</div>
-                  </div>
-                  <div>
-                    <div className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#F89843]">24 Saat</div>
-                    <div className="text-[11px] text-[#C8C2B8]">Stoktan Hızlı Kargo</div>
-                  </div>
-                </div>
               </div>
 
-              {/* SAĞ VİTRİN: İMZA ŞİŞELERİMİZ */}
               <div className="lg:col-span-5 flex flex-col items-center">
                 <div className="relative w-full max-w-md bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/15 shadow-2xl">
                   <div className="flex items-center justify-between mb-4">
@@ -507,119 +838,217 @@ export default function App() {
                   </div>
 
                   <div className="grid grid-cols-2 gap-4 items-center">
-                    <div
-                      onClick={() => setDetailModalProduct(catalog[0])}
-                      className="bg-black/25 hover:bg-black/40 p-4 rounded-2xl border border-white/10 cursor-pointer transition-all text-center group"
-                    >
-                      <div className="group-hover:scale-105 transition-transform">
-                        <RealFrestinBottleCardSVG labelColor="#7C1D1D" liquidTint="#F0D4A3" title="ALTHAIR" subLabel="ALTHAÏR" />
-                      </div>
-                      <div className="text-xs font-bold text-white mt-1">Frestin Althaïr</div>
-                      <div className="text-[10px] text-[#D6CFC2]">Bourbon Vanilya & Tarçın</div>
+                    <div onClick={() => setActiveTab('finder')} className="bg-black/25 p-4 rounded-2xl border border-white/10 cursor-pointer text-center group">
+                      <RealFrestinBottleCardSVG labelColor="#7C1D1D" liquidTint="#F0D4A3" title="ALTHAIR" subLabel="ALTHAÏR" />
+                      <div className="text-xs font-bold text-white mt-1">Althaïr</div>
                     </div>
-
-                    <div
-                      onClick={() => setDetailModalProduct(catalog[1])}
-                      className="bg-black/25 hover:bg-black/40 p-4 rounded-2xl border border-white/10 cursor-pointer transition-all text-center group"
-                    >
-                      <div className="group-hover:scale-105 transition-transform">
-                        <RealFrestinBottleCardSVG labelColor="#B87A1E" liquidTint="#E8D5A7" title="LEAUPAR" subLabel="L'EAU PAR" />
-                      </div>
-                      <div className="text-xs font-bold text-white mt-1">Frestin L&apos;Eau Par</div>
-                      <div className="text-[10px] text-[#D6CFC2]">Ferah & Akuatik</div>
+                    <div onClick={() => setActiveTab('finder')} className="bg-black/25 p-4 rounded-2xl border border-white/10 cursor-pointer text-center group">
+                      <RealFrestinBottleCardSVG labelColor="#B87A1E" liquidTint="#E8D5A7" title="LEAUPAR" subLabel="L'EAU PAR" />
+                      <div className="text-xs font-bold text-white mt-1">L&apos;Eau Par</div>
                     </div>
                   </div>
 
                   <button
-                    onClick={() => setActiveTab('store')}
-                    className="w-full mt-5 py-3 rounded-xl bg-white text-[#1E1E1C] hover:bg-[#FAF7F2] text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    onClick={() => setActiveTab('finder')}
+                    className="w-full mt-5 py-3.5 rounded-xl bg-gradient-to-r from-[#F59E0B] via-[#EA580C] to-[#D97706] text-white hover:brightness-110 text-xs font-extrabold flex items-center justify-center gap-2 cursor-pointer shadow-lg"
                   >
-                    <span>Tüm Koleksiyonu Keşfet</span>
+                    <Sparkles className="w-4 h-4" />
+                    <span>Fragrantica İle Kendi Parfümünü Bul</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
             </div>
           </section>
-
-          {/* NEDEN FRESTIN ÖZELLİK KARTLARI */}
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-3xl border border-[#E6E0D6] shadow-xs flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#E86F38]/15 text-[#E86F38] flex items-center justify-center shrink-0">
-                <Award className="w-6 h-6" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Saf Esans Kalitesi</h3>
-                <p className="text-xs text-[#5A5751] leading-relaxed">
-                  Bekledikçe kokunun kimyasını bozan sentetik sabitleyiciler eklemiyoruz; kalıcılığımız doğrudan esans kalitemizden gelir.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-3xl border border-[#E6E0D6] shadow-xs flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#4A7C59]/15 text-[#4A7C59] flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Özel Şişe & Valf Seçimi</h3>
-                <p className="text-xs text-[#5A5751] leading-relaxed">
-                  Elinize aldığınız anda ağırlığını ve kalitesini hissettiren kristal şişelerimiz ve kusursuz püskürtme yapan valflerimizle sunulur.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-3xl border border-[#E6E0D6] shadow-xs flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#B86B43]/15 text-[#B86B43] flex items-center justify-center shrink-0">
-                <Truck className="w-6 h-6" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Shopier Güvencesiyle</h3>
-                <p className="text-xs text-[#5A5751] leading-relaxed">
-                  Tüm siparişlerinizi 256-bit SSL korumalı Shopier altyapısıyla kredi/banka kartınızla güvenle oluşturabilirsiniz.
-                </p>
-              </div>
-            </div>
-          </section>
         </main>
       )}
 
-      {/* ================= PARFÜMÜNÜ BUL ================= */}
+      {/* ================= PARFÜMÜNÜ BUL (GÖSTERİŞLİ & TAM KİŞİSELLEŞTİRİLEBİLİR) ================= */}
       {activeTab === 'finder' && (
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-          <div className="bg-gradient-to-r from-[#1E1E1C] to-[#2D2825] text-white rounded-3xl p-6 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E86F38]/20 text-[#F89843] text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>AKILLI KOKU EŞLEŞTİRME MOTORU</span>
+          {/* LÜKS HERO BAŞLIK KARTI */}
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#171210] via-[#2A1B12] to-[#432312] text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-[#F59E0B]/40">
+            <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-to-br from-[#F59E0B]/25 to-[#EA580C]/5 blur-3xl pointer-events-none" />
+            <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+              <div className="space-y-3 max-w-3xl">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#F59E0B]/25 to-[#EA580C]/25 border border-[#F59E0B]/50 text-[#FDE68A] text-xs font-extrabold tracking-wider uppercase">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FBBF24]" />
+                  <span>KİŞİYE ÖZEL FRAGRANTICA KOKU LABORATUVARI</span>
+                </div>
+                <h1 className="font-serif-luxury text-3xl sm:text-5xl font-bold leading-tight">
+                  Hayalinizdeki Parfümü ve Notaları <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDE68A] via-[#F59E0B] to-[#FB923C]">Sınırsızca Tasarlayın</span>
+                </h1>
+                <p className="text-xs sm:text-sm text-[#E7E0D6] leading-relaxed">
+                  Fragrantica dünyasındaki tüm parfümleri ve yüzlerce koku notasını seçin. Listede bulamadığınız <strong>herhangi bir parfümü veya notayı doğrudan arama kutusuna yazarak tek tıkla kendiniz ekleyin</strong>; size en uygun Frestin Extrait karşılığını anında bulalım.
+                </p>
               </div>
-              <h1 className="font-serif-luxury text-3xl sm:text-4xl font-bold">Sevdiğiniz Parfümlere En Yakın Frestin Notalarını Bulun</h1>
-              <p className="text-xs sm:text-sm text-[#D6CFC2] leading-relaxed">
-                Beğendiğiniz markalı parfümleri seçin veya sevdiğiniz nota notalarını ekleyin; yüksek esans oranına sahip eşsiz Frestin karşılığını saniyeler içinde keşfedin.
-              </p>
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0">
+                <button
+                  onClick={() => setShowAddCustomModal(true)}
+                  className="px-5 py-3.5 rounded-2xl bg-gradient-to-r from-[#F59E0B] to-[#EA580C] hover:brightness-110 text-[#1E1E1C] font-extrabold text-xs flex items-center gap-2 shadow-xl cursor-pointer"
+                >
+                  <Plus className="w-4 h-4 stroke-[2.5]" />
+                  <span>Özel Parfüm & Nota Tanımla</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedRefIds([]);
+                    setLikedNotes([]);
+                    setDislikedNotes([]);
+                    setPrefGender('Tümü');
+                    setPrefSeason('Tümü');
+                    setPrefTime('Tümü');
+                    setPrefSillage('Tümü');
+                  }}
+                  className="px-4 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Sıfırla</span>
+                </button>
+              </div>
             </div>
-            <button onClick={() => setActiveTab('store')} className="px-6 py-3.5 rounded-2xl bg-[#E86F38] hover:bg-[#D45E2B] text-white text-xs font-bold flex items-center gap-2 shadow-lg transition-all shrink-0">
-              <span>Tüm Parfümleri İncele</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+
+            {/* KİŞİSEL KOKU PROFİLİ ÖZET BARI */}
+            <div className="relative z-10 mt-6 pt-5 border-t border-white/15 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-black/30 rounded-2xl p-3.5 border border-white/10">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[#FBBF24] mb-1.5">
+                  1. Seçtiğiniz Referans Parfümler ({selectedRefIds.length})
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {selectedRefIds.length === 0 ? (
+                    <span className="text-xs text-white/50">Henüz parfüm seçilmedi</span>
+                  ) : (
+                    catalog
+                      .filter((c) => selectedRefIds.includes(c.id))
+                      .map((p) => (
+                        <span
+                          key={p.id}
+                          onClick={() => setSelectedRefIds(selectedRefIds.filter((id) => id !== p.id))}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#F59E0B]/25 border border-[#F59E0B]/50 text-[#FEF3C7] text-[11px] font-semibold cursor-pointer hover:bg-red-500/30"
+                        >
+                          {p.fragranticaRef} <X className="w-3 h-3" />
+                        </span>
+                      ))
+                  )}
+                </div>
+              </div>
+
+              <div className="bg-black/30 rounded-2xl p-3.5 border border-white/10">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[#4ADE80] mb-1.5">
+                  2. Sevdiğiniz Notalar ({likedNotes.length})
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {likedNotes.length === 0 ? (
+                    <span className="text-xs text-white/50">Nota seçilmedi</span>
+                  ) : (
+                    likedNotes.map((n) => (
+                      <span
+                        key={n}
+                        onClick={() => setLikedNotes(likedNotes.filter((item) => item !== n))}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#22C55E]/25 border border-[#4ADE80]/40 text-[#DCFCE7] text-[11px] font-semibold cursor-pointer"
+                      >
+                        + {n} <X className="w-3 h-3" />
+                      </span>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              <div className="bg-black/30 rounded-2xl p-3.5 border border-white/10">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[#F87171] mb-1.5">
+                  3. İstemediğiniz Notalar ({dislikedNotes.length})
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {dislikedNotes.length === 0 ? (
+                    <span className="text-xs text-white/50">Hariç tutulan nota yok</span>
+                  ) : (
+                    dislikedNotes.map((n) => (
+                      <span
+                        key={n}
+                        onClick={() => setDislikedNotes(dislikedNotes.filter((item) => item !== n))}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#EF4444]/25 border border-[#F87171]/40 text-[#FEE2E2] text-[11px] font-semibold cursor-pointer"
+                      >
+                        - {n} <X className="w-3 h-3" />
+                      </span>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* SOL PANEL: PARFÜM, NOTA VE KİŞİSELLEŞTİRME SEÇİCİLERİ */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-white rounded-3xl p-6 border border-[#E6E0D6] shadow-xs space-y-4">
-                <h2 className="font-serif-luxury text-xl font-bold text-[#1E1E1C] flex items-center gap-2">
-                  <Search className="w-4 h-4 text-[#E86F38]" />
-                  <span>Beğendiğiniz Parfümleri Seçin</span>
-                </h2>
-                <input
-                  type="text"
-                  placeholder="Parfüm adı veya marka ara..."
-                  value={refSearchQuery}
-                  onChange={(e) => setRefSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs focus:outline-none focus:border-[#E86F38]"
-                />
-                <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+              {/* ADIM 1: FRAGRANTICA PARFÜM SEÇİMİ & SERBEST EKLEME */}
+              <div className="bg-white rounded-3xl p-6 border-2 border-[#F59E0B]/30 shadow-md space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#D97706]">ADIM 1 • FRAGRANTICA ARŞİVİ</span>
+                    <h2 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Beğendiğiniz Parfümleri Seçin veya Yazın</h2>
+                  </div>
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#FEF3C7] text-[#92400E]">{catalog.length}+ Parfüm</span>
+                </div>
+
+                {/* Cinsiyet Filtresi */}
+                <div className="flex bg-[#F3EFE6] p-1 rounded-xl gap-1">
+                  {['Tümü', 'Kadın', 'Erkek', 'Unisex'].map((g) => (
+                    <button
+                      key={g}
+                      onClick={() => setRefGenderFilter(g)}
+                      className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                        refGenderFilter === g ? 'bg-[#1E1E1C] text-white shadow-xs' : 'text-[#78756E] hover:text-[#1E1E1C]'
+                      }`}
+                    >
+                      {g}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Arama ve Anında Özel Parfüm Ekleme Kutusu */}
+                <div className="space-y-2">
+                  <div className="relative flex gap-2">
+                    <div className="relative flex-1">
+                      <Search className="w-4 h-4 text-[#78756E] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        placeholder="Fragrantica'dan marka veya parfüm yazın (Örn: Dior Homme Intense)..."
+                        value={refSearchQuery}
+                        onChange={(e) => setRefSearchQuery(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && refSearchQuery.trim()) {
+                            e.preventDefault();
+                            handleQuickAddPerfumeFromSearch(refSearchQuery);
+                          }
+                        }}
+                        className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs focus:outline-none focus:border-[#D97706]"
+                      />
+                    </div>
+                    {refSearchQuery.trim() && (
+                      <button
+                        onClick={() => handleQuickAddPerfumeFromSearch(refSearchQuery)}
+                        className="px-3.5 py-2 rounded-xl bg-[#D97706] hover:bg-[#B45309] text-white text-xs font-bold shrink-0 flex items-center gap-1 cursor-pointer shadow-sm"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Ekle</span>
+                      </button>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-[#78756E]">
+                    💡 Aradığınız parfüm listede yoksa adını yukarıya yazıp <strong>Enter</strong>&apos;a veya <strong>+ Ekle</strong> butonuna basın!
+                  </p>
+                </div>
+
+                <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
                   {catalog
-                    .filter((p) => p.name.toLowerCase().includes(refSearchQuery.toLowerCase()) || p.fragranticaRef.toLowerCase().includes(refSearchQuery.toLowerCase()))
+                    .filter((p) => {
+                      const matchesGender = refGenderFilter === 'Tümü' || p.gender === refGenderFilter;
+                      const matchesSearch =
+                        p.name.toLowerCase().includes(refSearchQuery.toLowerCase()) ||
+                        p.fragranticaRef.toLowerCase().includes(refSearchQuery.toLowerCase()) ||
+                        p.notes.some((n) => n.name.toLowerCase().includes(refSearchQuery.toLowerCase()));
+                      return matchesGender && matchesSearch;
+                    })
                     .map((item) => {
                       const isSelected = selectedRefIds.includes(item.id);
                       return (
@@ -627,41 +1056,128 @@ export default function App() {
                           key={item.id}
                           onClick={() => {
                             if (isSelected) {
-                              if (selectedRefIds.length > 1) setSelectedRefIds(selectedRefIds.filter((id) => id !== item.id));
+                              setSelectedRefIds(selectedRefIds.filter((id) => id !== item.id));
                             } else {
                               setSelectedRefIds([...selectedRefIds, item.id]);
                             }
                           }}
-                          className={`p-3 rounded-2xl border cursor-pointer transition-all flex items-center justify-between ${
-                            isSelected ? 'bg-[#1E1E1C] text-white border-[#1E1E1C]' : 'bg-[#FAF7F2] hover:bg-[#F3EFE6] border-[#E6E0D6] text-[#1E1E1C]'
+                          className={`p-3 rounded-2xl border cursor-pointer transition-all flex items-center justify-between gap-2 ${
+                            isSelected
+                              ? 'bg-gradient-to-r from-[#1E1E1C] to-[#3B2314] text-white border-[#F59E0B] shadow-md'
+                              : 'bg-[#FAF7F2] hover:bg-[#FEF3C7]/50 border-[#E6E0D6] text-[#1E1E1C]'
                           }`}
                         >
-                          <div>
-                            <div className="text-xs font-bold">{item.name}</div>
-                            <div className={`text-[10px] ${isSelected ? 'text-[#D6CFC2]' : 'text-[#78756E]'}`}>{item.fragranticaRef}</div>
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-bold truncate">{item.fragranticaRef}</span>
+                              <span
+                                className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
+                                  isSelected ? 'bg-[#F59E0B]/30 text-[#FDE68A]' : 'bg-[#E6E0D6] text-[#5A5751]'
+                                }`}
+                              >
+                                {item.gender}
+                              </span>
+                            </div>
+                            <div className={`text-[10px] truncate mt-0.5 ${isSelected ? 'text-[#FDE68A]' : 'text-[#78756E]'}`}>
+                              Notalar: {item.notes.map((n) => n.name).join(', ')}
+                            </div>
                           </div>
-                          {isSelected && <CheckCircle2 className="w-4 h-4 text-[#F89843]" />}
+                          {isSelected ? (
+                            <CheckCircle2 className="w-5 h-5 text-[#FBBF24] shrink-0" />
+                          ) : (
+                            <Plus className="w-4 h-4 text-[#78756E] shrink-0" />
+                          )}
                         </div>
                       );
                     })}
                 </div>
               </div>
 
-              <div className="bg-white rounded-3xl p-6 border border-[#E6E0D6] shadow-xs space-y-4">
-                <h2 className="font-serif-luxury text-xl font-bold text-[#1E1E1C] flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#E86F38]" />
-                  <span>Notalar & Tercihler</span>
-                </h2>
-                <div className="flex bg-[#F3EFE6] p-1 rounded-xl">
-                  <button onClick={() => setNoteSelectionMode('like')} className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${noteSelectionMode === 'like' ? 'bg-[#4A7C59] text-white' : 'text-[#78756E]'}`}>
-                    Sevdiğim Notalar
+              {/* ADIM 2: TÜM FRAGRANTICA NOTALARI & KENDİ NOTANI YAZ */}
+              <div className="bg-white rounded-3xl p-6 border-2 border-[#F59E0B]/30 shadow-md space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#D97706]">ADIM 2 • KOKU NOTASI ANSİKLOPEDİSİ</span>
+                    <h2 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Notaları Seçin veya Kendiniz Yazın</h2>
+                  </div>
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#FEF3C7] text-[#92400E]">{allAvailableNotes.length}+ Nota</span>
+                </div>
+
+                {/* Sevdiğim / İstemediğim Mod Seçici */}
+                <div className="flex bg-[#F3EFE6] p-1 rounded-xl gap-1">
+                  <button
+                    onClick={() => setNoteSelectionMode('like')}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer transition-all ${
+                      noteSelectionMode === 'like' ? 'bg-[#4A7C59] text-white shadow-sm' : 'text-[#78756E]'
+                    }`}
+                  >
+                    <ThumbsUp className="w-3.5 h-3.5" />
+                    <span>Sevdiğim Notalar ({likedNotes.length})</span>
                   </button>
-                  <button onClick={() => setNoteSelectionMode('dislike')} className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${noteSelectionMode === 'dislike' ? 'bg-[#C0392B] text-white' : 'text-[#78756E]'}`}>
-                    İstemediğim Notalar
+                  <button
+                    onClick={() => setNoteSelectionMode('dislike')}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer transition-all ${
+                      noteSelectionMode === 'dislike' ? 'bg-[#C0392B] text-white shadow-sm' : 'text-[#78756E]'
+                    }`}
+                  >
+                    <ThumbsDown className="w-3.5 h-3.5" />
+                    <span>İstemediğim Notalar ({dislikedNotes.length})</span>
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto">
-                  {INITIAL_NOTE_CATEGORIES.map((note) => {
+
+                {/* Nota Arama ve Serbest Nota Yazıp Ekleme */}
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <Search className="w-4 h-4 text-[#78756E] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        placeholder="Nota ara veya kendi istediğin notayı yaz (Örn: Kavrulmuş Kahve, Ihlamur)..."
+                        value={noteSearchQuery}
+                        onChange={(e) => setNoteSearchQuery(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && noteSearchQuery.trim()) {
+                            e.preventDefault();
+                            handleQuickAddNote(noteSearchQuery);
+                          }
+                        }}
+                        className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs focus:outline-none focus:border-[#D97706]"
+                      />
+                    </div>
+                    {noteSearchQuery.trim() && (
+                      <button
+                        onClick={() => handleQuickAddNote(noteSearchQuery)}
+                        className={`px-3.5 py-2 rounded-xl text-white text-xs font-bold shrink-0 flex items-center gap-1 cursor-pointer ${
+                          noteSelectionMode === 'like' ? 'bg-[#4A7C59]' : 'bg-[#C0392B]'
+                        }`}
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Notayı Ekle</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Nota Ailesi Sekmeleri */}
+                <div className="flex gap-1.5 overflow-x-auto pb-1">
+                  {Object.keys(FRAGRANTICA_NOTE_FAMILIES).map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setActiveNoteCategory(cat)}
+                      className={`px-3 py-1.5 rounded-xl text-[11px] font-bold whitespace-nowrap cursor-pointer transition-all ${
+                        activeNoteCategory === cat
+                          ? 'bg-[#D97706] text-white shadow-xs'
+                          : 'bg-[#FAF7F2] text-[#5A5751] border border-[#E6E0D6] hover:bg-[#FEF3C7]'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Nota Etiketleri */}
+                <div className="flex flex-wrap gap-1.5 max-h-60 overflow-y-auto p-1">
+                  {displayedNotes.map((note) => {
                     const isLiked = likedNotes.includes(note);
                     const isDisliked = dislikedNotes.includes(note);
                     return (
@@ -670,436 +1186,323 @@ export default function App() {
                         onClick={() => {
                           if (noteSelectionMode === 'like') {
                             setLikedNotes(isLiked ? likedNotes.filter((n) => n !== note) : [...likedNotes, note]);
-                            if (isDisliked) setDislikedNotes(dislikedNotes.filter((n) => n !== note));
+                            setDislikedNotes(dislikedNotes.filter((n) => n !== note));
                           } else {
                             setDislikedNotes(isDisliked ? dislikedNotes.filter((n) => n !== note) : [...dislikedNotes, note]);
-                            if (isLiked) setLikedNotes(likedNotes.filter((n) => n !== note));
+                            setLikedNotes(likedNotes.filter((n) => n !== note));
                           }
                         }}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-                          isLiked ? 'bg-[#4A7C59] text-white font-bold' : isDisliked ? 'bg-[#C0392B] text-white font-bold' : 'bg-[#FAF7F2] hover:bg-[#F3EFE6] border border-[#E6E0D6] text-[#5A5751]'
+                        className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+                          isLiked
+                            ? 'bg-[#4A7C59] text-white font-bold shadow-xs ring-2 ring-[#4A7C59]/30'
+                            : isDisliked
+                            ? 'bg-[#C0392B] text-white font-bold line-through shadow-xs'
+                            : 'bg-[#FAF7F2] hover:bg-[#FEF3C7] border border-[#E6E0D6] text-[#1E1E1C]'
                         }`}
                       >
-                        {note} {isLiked ? '✓' : isDisliked ? '✕' : ''}
+                        {isLiked && '✓ '}
+                        {isDisliked && '✕ '}
+                        {note}
                       </button>
                     );
                   })}
                 </div>
               </div>
-            </div>
 
-            <div className="lg:col-span-7 space-y-6">
-              <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E6E0D6] shadow-xs space-y-6">
-                <div className="flex items-center justify-between border-b border-[#E6E0D6] pb-4">
-                  <div>
-                    <span className="text-xs font-bold text-[#E86F38] uppercase tracking-wider">SİZİN İÇİN ÖZEL ÖNERİLENLER</span>
-                    <h2 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Eşleşen Frestin Parfümleri</h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-      )}
-
-      {/* ================= STOKLU ÜRÜNLER (DOĞRUDAN SHOPIER YÖNLENDİRME) ================= */}
-      {activeTab === 'instock' && (
-        <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-          <div className="bg-gradient-to-br from-[#2B4C36] via-[#3B6447] to-[#4A7C59] text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/15 text-center space-y-6 relative overflow-hidden">
-            <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-[#E9C46A]/15 blur-3xl pointer-events-none" />
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 text-[#E9C46A] text-xs font-bold uppercase tracking-wider">
-              <Zap className="w-4 h-4 fill-current" />
-              <span>20 Gün Beklemeden • 24 Saatte Kargoda</span>
-            </div>
-
-            <h1 className="font-serif-luxury text-3xl sm:text-5xl font-bold max-w-2xl mx-auto leading-tight">
-              Hazır Stoklu Ürünlerimiz Shopier Mağazamızda!
-            </h1>
-
-            <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto leading-relaxed">
-              Anlık güncellenen tüm hazır stoklu parfümlerimizi, güncel adetlerini ve fiyatlarını doğrudan resmi <strong>Shopier</strong> mağazamız üzerinden inceleyebilir ve 256-bit SSL güvencesiyle hemen sipariş verebilirsiniz.
-            </p>
-
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={SHOPIER_LINKS.store}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#1E1E1C] hover:bg-black text-white text-sm sm:text-base font-bold flex items-center justify-center gap-3 shadow-xl transition-all"
-              >
-                <ShoppingBag className="w-5 h-5 text-[#E9C46A]" />
-                <span>Shopier Mağazamıza Git (Tüm Stoklu Ürünler)</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-
-          {/* HIZLI SHOPIER SİPARİŞ KARTLARI */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a
-              href={SHOPIER_LINKS.store}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white p-6 rounded-3xl border border-[#E6E0D6] hover:border-[#4A7C59] shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group"
-            >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#4A7C59]/15 text-[#4A7C59] flex items-center justify-center">
-                  <PackageCheck className="w-6 h-6" />
-                </div>
-                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#4A7C59]">Anlık Güncel Liste</span>
-                <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C] group-hover:text-[#4A7C59] transition-colors">
-                  Tüm Stoklu Parfümleri Gör
-                </h3>
-                <p className="text-xs text-[#5A5751] leading-relaxed">
-                  Şu an stokta hazır bulunan ve aynı gün / ertesi gün kargoya teslim edilen tüm parfümlerimizi Shopier vitrinimizde görüntüleyin.
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-[#E6E0D6] flex items-center justify-between text-xs font-bold text-[#4A7C59]">
-                <span>Shopier Vitrinini Aç</span>
-                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </div>
-            </a>
-
-            <a
-              href={SHOPIER_LINKS['50ml']}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white p-6 rounded-3xl border border-[#E6E0D6] hover:border-[#E86F38] shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group"
-            >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#E86F38]/15 text-[#E86F38] flex items-center justify-center font-bold text-sm">
-                  50ml
-                </div>
-                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#E86F38]">{PRICE_50ML} TL • Hızlı Sipariş</span>
-                <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C] group-hover:text-[#E86F38] transition-colors">
-                  50 ml Frestin Parfüm Siparişi
-                </h3>
-                <p className="text-xs text-[#5A5751] leading-relaxed">
-                  50 ml kristal şişe parfüm siparişinizi doğrudan Shopier ödeme sayfası üzerinden güvenle oluşturun.
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-[#E6E0D6] flex items-center justify-between text-xs font-bold text-[#E86F38]">
-                <span>50 ml Shopier Sayfasına Git</span>
-                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </div>
-            </a>
-
-            <a
-              href={SHOPIER_LINKS['100ml']}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white p-6 rounded-3xl border border-[#E6E0D6] hover:border-[#B86B43] shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group"
-            >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#B86B43]/15 text-[#B86B43] flex items-center justify-center font-bold text-sm">
-                  100ml
-                </div>
-                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#B86B43]">{PRICE_100ML} TL • Avantajlı Boy</span>
-                <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C] group-hover:text-[#B86B43] transition-colors">
-                  100 ml Frestin Parfüm Siparişi
-                </h3>
-                <p className="text-xs text-[#5A5751] leading-relaxed">
-                  100 ml avantajlı boy kristal şişe parfüm siparişinizi doğrudan Shopier ödeme sayfası üzerinden oluşturun.
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-[#E6E0D6] flex items-center justify-between text-xs font-bold text-[#B86B43]">
-                <span>100 ml Shopier Sayfasına Git</span>
-                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </div>
-            </a>
-          </div>
-        </main>
-      )}
-
-      {/* ================= TÜM PARFÜMLER (MAĞAZA) ================= */}
-      {activeTab === 'store' && (
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E6E0D6] pb-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#E86F38]">FRESTIN İMZA KOLEKSİYONU</span>
-              <h1 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#1E1E1C]">Tüm Parfümlerimiz</h1>
-            </div>
-            <a
-              href={SHOPIER_LINKS.store}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-3 rounded-2xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center gap-2 self-start sm:self-auto shadow-sm"
-            >
-              <span>Shopier Mağazamızda Gör</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {catalog.map((product) => {
-              const selectedSize = getSelectedSize(product.id);
-              const finalShopierLink =
-                selectedSize === '100ml'
-                  ? product.shopierLink100 || SHOPIER_LINKS['100ml']
-                  : product.shopierLink50 || SHOPIER_LINKS['50ml'];
-              return (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-3xl border border-[#E6E0D6] hover:border-[#E86F38] transition-all shadow-xs hover:shadow-xl flex flex-col overflow-hidden group"
-                >
-                  <div
-                    onClick={() => setDetailModalProduct(product)}
-                    className="relative bg-[#F3EFE6]/70 pt-8 pb-6 px-4 flex flex-col items-center cursor-pointer"
-                  >
-                    <div className="group-hover:scale-105 transition-transform duration-300">
-                      <RealFrestinBottleCardSVG
-                        labelColor={product.bottleColor}
-                        liquidTint={product.liquidColor}
-                        title={product.code}
-                        subLabel={product.name.replace('Frestin ', '').slice(0, 14)}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                      <div className="flex items-center justify-between text-xs text-[#78756E] mb-1">
-                        <span className="truncate max-w-[140px]">{product.fragranticaRef}</span>
-                        <div className="flex items-center gap-1 shrink-0">
-                          <Star className="w-3.5 h-3.5 fill-[#E9C46A] text-[#E9C46A]" />
-                          <span className="font-bold text-[#1E1E1C]">{product.rating}</span>
-                        </div>
-                      </div>
-                      <h3
-                        onClick={() => setDetailModalProduct(product)}
-                        className="font-serif-luxury text-xl font-bold text-[#1E1E1C] cursor-pointer hover:text-[#E86F38] transition-colors"
-                      >
-                        {product.name}
-                      </h3>
-                      <p className="text-xs text-[#5A5751] mt-1">{product.subtitle}</p>
-                    </div>
-
-                    <div className="space-y-3 pt-3 border-t border-[#E6E0D6]">
-                      <div className="flex bg-[#F3EFE6] p-1 rounded-xl">
-                        <button
-                          onClick={() => setSelectedSize(product.id, '50ml')}
-                          className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                            selectedSize === '50ml' ? 'bg-white text-[#1E1E1C] shadow-xs' : 'text-[#78756E]'
-                          }`}
-                        >
-                          50ml ({PRICE_50ML}₺)
-                        </button>
-                        <button
-                          onClick={() => setSelectedSize(product.id, '100ml')}
-                          className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                            selectedSize === '100ml' ? 'bg-white text-[#1E1E1C] shadow-xs' : 'text-[#78756E]'
-                          }`}
-                        >
-                          100ml ({PRICE_100ML}₺)
-                        </button>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-2">
-                        <a
-                          href={finalShopierLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="py-2.5 px-3 rounded-xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center justify-center gap-1 shadow-sm transition-all"
-                        >
-                          <span>Shopier Al</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                        <button
-                          onClick={() => addToCart(product, selectedSize)}
-                          className="py-2.5 px-3 rounded-xl bg-[#1E1E1C] hover:bg-[#333] text-white text-xs font-bold flex items-center justify-center gap-1 transition-all"
-                        >
-                          <ShoppingBag className="w-3.5 h-3.5" />
-                          <span>Sepete Ekle</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </main>
-      )}
-
-      {/* ================= ÜRETİM & TESLİMAT ================= */}
-      {activeTab === 'process' && (
-        <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-          <div className="text-center space-y-3">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#B86B43]">ŞEFFAF ÜRETİM VE KALİTE GÜVENCESİ</span>
-            <h1 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-[#1E1E1C]">Siparişiniz Nasıl Hazırlanıyor?</h1>
-            <p className="text-xs sm:text-sm text-[#78756E] max-w-2xl mx-auto">
-              Stoklu ürünlerimiz 24 saat içinde kargoya verilirken; özel üretim talepleriniz atölyemizde özenle hazırlanmaktadır.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-3xl border border-[#E6E0D6] shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#E86F38]/10 text-[#E86F38] flex items-center justify-center font-bold text-lg">01</div>
-              <h3 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Özenle Seçilen Esanslar</h3>
-              <p className="text-xs text-[#5A5751] leading-relaxed">
-                Her parfüm için dünyaca ünlü esans üreticilerinden en saf bileşenleri tedarik ediyor, kimyayı bozan sentetik katkılar kullanmıyoruz.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-3xl border border-[#E6E0D6] shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#4A7C59]/10 text-[#4A7C59] flex items-center justify-center font-bold text-lg">02</div>
-              <h3 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Yüksek Extrait Oranı</h3>
-              <p className="text-xs text-[#5A5751] leading-relaxed">
-                %25 ila %28 oranında saf esans yoğunluğu ile gün boyu süren kalıcılık ve güçlü silaj (yayılım) sağlıyoruz.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-3xl border border-[#E6E0D6] shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#B86B43]/10 text-[#B86B43] flex items-center justify-center font-bold text-lg">03</div>
-              <h3 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Kristal Şişe & Kargolama</h3>
-              <p className="text-xs text-[#5A5751] leading-relaxed">
-                Ağır kristal şişelerimiz ve kusursuz valflerimizle paketlenerek güvenle adresinize ulaştırılır.
-              </p>
-            </div>
-          </div>
-        </main>
-      )}
-
-      {/* ================= ÜRÜN DETAY MODALI ================= */}
-      {detailModalProduct && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-[#E6E0D6] space-y-6 relative max-h-[90vh] overflow-y-auto">
-            <button onClick={() => setDetailModalProduct(null)} className="absolute top-5 right-5 p-2 rounded-full bg-[#FAF7F2] hover:bg-[#E6E0D6]">
-              <X className="w-5 h-5 text-[#1E1E1C]" />
-            </button>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-5 bg-[#FAF7F2] p-6 rounded-2xl flex items-center justify-center">
-                <RealFrestinBottleCardSVG labelColor={detailModalProduct.bottleColor} liquidTint={detailModalProduct.liquidTint} title={detailModalProduct.code} subLabel={detailModalProduct.name.replace('Frestin ', '')} />
-              </div>
-              <div className="md:col-span-7 space-y-4">
+              {/* ADIM 3: KİŞİSEL KULLANIM ÖZELLEŞTİRMELERİ */}
+              <div className="bg-white rounded-3xl p-6 border-2 border-[#F59E0B]/30 shadow-md space-y-4">
                 <div>
-                  <span className="text-xs font-bold text-[#E86F38] uppercase tracking-wider">{detailModalProduct.gender} • {detailModalProduct.fragranticaRef}</span>
-                  <h2 className="font-serif-luxury text-3xl font-bold text-[#1E1E1C] mt-1">{detailModalProduct.name}</h2>
-                  <p className="text-xs text-[#78756E] mt-1">{detailModalProduct.subtitle}</p>
-                </div>
-
-                <div className="space-y-2 bg-[#FAF7F2] p-4 rounded-2xl border border-[#E6E0D6]">
-                  <div className="text-xs font-bold text-[#1E1E1C]">Koku Piramidi:</div>
-                  <div className="text-xs text-[#5A5751] space-y-1">
-                    <div><strong>Üst Notalar:</strong> {detailModalProduct.pyramid.top.join(', ')}</div>
-                    <div><strong>Kalp Notalar:</strong> {detailModalProduct.pyramid.heart.join(', ')}</div>
-                    <div><strong>Alt Notalar:</strong> {detailModalProduct.pyramid.base.join(', ')}</div>
-                  </div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#D97706]">ADIM 3 • KİŞİSEL KOKU KARAKTERİ</span>
+                  <h2 className="font-serif-luxury text-xl font-bold text-[#1E1E1C]">Kullanım Tercihlerinizi Özelleştirin</h2>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="flex bg-[#F3EFE6] p-1 rounded-xl">
-                    <button onClick={() => setSelectedSize(detailModalProduct.id, '50ml')} className={`flex-1 py-2 rounded-lg text-xs font-bold ${getSelectedSize(detailModalProduct.id) === '50ml' ? 'bg-white text-[#1E1E1C]' : 'text-[#78756E]'}`}>
-                      50 ml ({PRICE_50ML} TL)
-                    </button>
-                    <button onClick={() => setSelectedSize(detailModalProduct.id, '100ml')} className={`flex-1 py-2 rounded-lg text-xs font-bold ${getSelectedSize(detailModalProduct.id) === '100ml' ? 'bg-white text-[#1E1E1C]' : 'text-[#78756E]'}`}>
-                      100 ml ({PRICE_100ML} TL)
-                    </button>
+                  <div>
+                    <label className="block text-[11px] font-bold text-[#5A5751] mb-1">Koku Cinsiyet Tercihi</label>
+                    <div className="grid grid-cols-4 gap-1.5">
+                      {['Tümü', 'Kadın', 'Erkek', 'Unisex'].map((val) => (
+                        <button
+                          key={val}
+                          onClick={() => setPrefGender(val)}
+                          className={`py-2 rounded-xl text-xs font-bold border cursor-pointer ${
+                            prefGender === val ? 'bg-[#1E1E1C] text-[#FDE68A] border-[#1E1E1C]' : 'bg-[#FAF7F2] text-[#5A5751] border-[#E6E0D6]'
+                          }`}
+                        >
+                          {val}
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="flex gap-2">
-                    {detailModalProduct.inStock && (
-                      <button
-                        onClick={() => {
-                          const size = getSelectedSize(detailModalProduct.id);
-                          const url = size === '100ml' ? (detailModalProduct.shopierLink100 || SHOPIER_LINKS['100ml']) : (detailModalProduct.shopierLink50 || SHOPIER_LINKS['50ml']);
-                          setDetailModalProduct(null);
-                          setShopierRedirectModal({ product: detailModalProduct, size, url });
-                        }}
-                        className="flex-1 py-3 rounded-xl bg-[#4A7C59] hover:bg-[#3A6347] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
+                  <div>
+                    <label className="block text-[11px] font-bold text-[#5A5751] mb-1">Mevsim Tercihi</label>
+                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
+                      {['Tümü', 'Kış', 'Yaz', 'İlkbahar', 'Sonbahar'].map((val) => (
+                        <button
+                          key={val}
+                          onClick={() => setPrefSeason(val)}
+                          className={`py-2 rounded-xl text-xs font-bold border cursor-pointer ${
+                            prefSeason === val ? 'bg-[#D97706] text-white border-[#D97706]' : 'bg-[#FAF7F2] text-[#5A5751] border-[#E6E0D6]'
+                          }`}
+                        >
+                          {val}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] font-bold text-[#5A5751] mb-1">Kullanım Zamanı</label>
+                      <select
+                        value={prefTime}
+                        onChange={(e) => setPrefTime(e.target.value)}
+                        className="w-full px-3 py-2 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs font-semibold"
                       >
-                        <span>Shopier&apos;den Hemen Al</span>
-                        <ExternalLink className="w-4 h-4" />
-                      </button>
-                    )}
-                    <button
-                      onClick={() => {
-                        addToCart(detailModalProduct, getSelectedSize(detailModalProduct.id));
-                        setDetailModalProduct(null);
-                      }}
-                      className="flex-1 py-3 rounded-xl bg-[#1E1E1C] hover:bg-[#333] text-white text-xs font-bold flex items-center justify-center gap-1.5"
-                    >
-                      <ShoppingBag className="w-4 h-4" />
-                      <span>Sepete Ekle</span>
-                    </button>
+                        <option value="Tümü">Tüm Zamanlar</option>
+                        <option value="Gündüz">Gündüz / Ofis</option>
+                        <option value="Gece">Gece / Özel Davet</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-bold text-[#5A5751] mb-1">Yayılım (Sillage)</label>
+                      <select
+                        value={prefSillage}
+                        onChange={(e) => setPrefSillage(e.target.value)}
+                        className="w-full px-3 py-2 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs font-semibold"
+                      >
+                        <option value="Tümü">Fark Etmez</option>
+                        <option value="Çok Yüksek">Çok Yüksek (İmza Koku)</option>
+                        <option value="Yüksek">Yüksek Kalıcılık</option>
+                        <option value="Orta">Orta / Ferah</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* SAĞ PANEL: CANLI EŞLEŞME SONUÇLARI */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#F59E0B]/30 shadow-xl space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E6E0D6] pb-4">
+                  <div>
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#D97706]">SİZE ÖZEL FRESTIN EXTRAIT EŞLEŞMELERİ</span>
+                    <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#1E1E1C]">
+                      Koku Profilinize En Uygun Parfümler
+                    </h2>
+                  </div>
+                  <span className="text-xs font-bold px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#FEF3C7] to-[#FDE68A] text-[#78350F] border border-[#F59E0B]/40 shrink-0">
+                    {matchedPerfumes.length} Sonuç Sıralandı
+                  </span>
+                </div>
+
+                <div className="space-y-5">
+                  {matchedPerfumes.slice(0, 12).map((item, idx) => {
+                    const selectedSize = getSelectedSize(item.id);
+                    const isTopMatch = idx === 0;
+                    return (
+                      <div
+                        key={item.id}
+                        className={`p-5 sm:p-6 rounded-3xl border transition-all flex flex-col md:flex-row items-center gap-6 ${
+                          isTopMatch
+                            ? 'bg-gradient-to-br from-[#FFFBEB] via-[#FEF3C7]/60 to-[#FAF7F2] border-2 border-[#F59E0B] shadow-lg'
+                            : 'bg-[#FAF7F2] border-[#E6E0D6] hover:border-[#D97706]/50'
+                        }`}
+                      >
+                        <div className="w-32 shrink-0 flex flex-col items-center justify-center">
+                          {isTopMatch && (
+                            <span className="mb-2 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#D97706] to-[#EA580C] text-white shadow-xs">
+                              ★ En İyi Eşleşme
+                            </span>
+                          )}
+                          <RealFrestinBottleCardSVG
+                            labelColor={item.bottleColor}
+                            liquidTint={item.liquidColor}
+                            title={item.code}
+                            subLabel={item.name.slice(0, 12)}
+                          />
+                        </div>
+
+                        <div className="flex-1 space-y-3 w-full">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs px-3 py-1 rounded-full bg-[#4A7C59] text-white font-extrabold shadow-xs">
+                                %{item.calculatedMatch} Uyum
+                              </span>
+                              <span className="text-[11px] px-2.5 py-1 rounded-full bg-white border border-[#E6E0D6] text-[#5A5751] font-semibold">
+                                {item.gender} • {item.season || 'Dört Mevsim'}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1 text-xs font-bold text-[#1E1E1C]">
+                              <Star className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />
+                              <span>{item.rating}</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">{item.name}</h3>
+                            <p className="text-xs text-[#78756E] mt-0.5">
+                              Fragrantica Referansı: <strong className="text-[#1E1E1C]">{item.fragranticaRef}</strong>
+                            </p>
+                          </div>
+
+                          {/* Notalar Gösterimi */}
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {item.notes.map((n) => {
+                              const isHighlighted = item.matchedNotePills?.includes(n.name) || likedNotes.includes(n.name);
+                              return (
+                                <span
+                                  key={n.name}
+                                  className={`text-[11px] px-2.5 py-1 rounded-lg font-medium ${
+                                    isHighlighted
+                                      ? 'bg-[#D97706] text-white font-bold shadow-2xs'
+                                      : 'bg-white border border-[#E6E0D6] text-[#5A5751]'
+                                  }`}
+                                >
+                                  {isHighlighted && '★ '}
+                                  {n.name}
+                                </span>
+                              );
+                            })}
+                          </div>
+
+                          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#E6E0D6]">
+                            <div className="flex bg-white p-1 rounded-xl border border-[#E6E0D6]">
+                              <button
+                                onClick={() => setSelectedSize(item.id, '50ml')}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
+                                  selectedSize === '50ml' ? 'bg-[#1E1E1C] text-white' : 'text-[#78756E]'
+                                }`}
+                              >
+                                50ml ({PRICE_50ML}₺)
+                              </button>
+                              <button
+                                onClick={() => setSelectedSize(item.id, '100ml')}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
+                                  selectedSize === '100ml' ? 'bg-[#1E1E1C] text-white' : 'text-[#78756E]'
+                                }`}
+                              >
+                                100ml ({PRICE_100ML}₺)
+                              </button>
+                            </div>
+                            <button
+                              onClick={() => addToCart(item, selectedSize)}
+                              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#D97706] to-[#EA580C] hover:brightness-110 text-white text-xs font-extrabold flex items-center gap-2 shadow-md cursor-pointer"
+                            >
+                              <ShoppingBag className="w-4 h-4" />
+                              <span>Sepete Ekle</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      )}
+
+      {/* ================= STOKLU ÜRÜNLER ================= */}
+      {activeTab === 'instock' && (
+        <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+          <div className="bg-gradient-to-br from-[#2B4C36] via-[#3B6447] to-[#4A7C59] text-white rounded-3xl p-8 sm:p-12 shadow-2xl text-center space-y-6">
+            <h1 className="font-serif-luxury text-3xl sm:text-5xl font-bold max-w-2xl mx-auto">Hazır Stoklu Ürünlerimiz Shopier Mağazamızda!</h1>
+            <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto">Tüm hazır stoklu parfümlerimizi Shopier üzerinden hemen inceleyebilir ve 256-bit SSL güvencesiyle sipariş verebilirsiniz.</p>
+            <a href={SHOPIER_LINKS.store} target="_blank" rel="noopener noreferrer" className="inline-flex px-8 py-4 rounded-2xl bg-[#1E1E1C] text-white text-sm font-bold items-center gap-3 shadow-xl">
+              <ShoppingBag className="w-5 h-5 text-[#E9C46A]" />
+              <span>Shopier Mağazamıza Git</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+        </main>
+      )}
+
+      {/* ================= YENİ ÖZEL PARFÜM EKLEME MODALI ================= */}
+      {showAddCustomModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#E6E0D6] space-y-6 relative">
+            <button onClick={() => setShowAddCustomModal(false)} className="absolute top-5 right-5 p-2 rounded-full bg-[#FAF7F2]">
+              <X className="w-5 h-5" />
+            </button>
+            <div className="space-y-2">
+              <span className="text-xs font-bold text-[#E86F38] uppercase">FRAGRANTICA VERİTABANI EKLEME</span>
+              <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Listede Olmayan Parfümü Ekle</h3>
+            </div>
+            <form onSubmit={handleAddCustomPerfume} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-[#1E1E1C] mb-1">Marka</label>
+                <input type="text" placeholder="Örn: Tom Ford" value={customBrandName} onChange={(e) => setCustomBrandName(e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-[#1E1E1C] mb-1">Parfüm Adı *</label>
+                <input type="text" required placeholder="Örn: Oud Wood" value={customFragranceName} onChange={(e) => setCustomFragranceName(e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs" />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-[#1E1E1C] mb-1">Cinsiyet</label>
+                <select value={customGender} onChange={(e) => setCustomGender(e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs">
+                  <option value="Unisex">Unisex</option>
+                  <option value="Erkek">Erkek</option>
+                  <option value="Kadın">Kadın</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-[#1E1E1C] mb-1">Notalar</label>
+                <input type="text" placeholder="Vanilya, Odunsu Notalar" value={customNotesInput} onChange={(e) => setCustomNotesInput(e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-[#DED8CE] bg-[#FAF7F2] text-xs" />
+              </div>
+              <button type="submit" className="w-full py-3.5 rounded-2xl bg-[#E86F38] text-white font-bold text-xs flex items-center justify-center gap-2">
+                <Sparkles className="w-4 h-4" /> Parfümü Listeye Ekle ve Eşleştir
+              </button>
+            </form>
           </div>
         </div>
       )}
 
       {/* ================= SEPET ÇEKMECESİ ================= */}
       {isCartOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex justify-end">
-          <div className="bg-white w-full max-w-md h-full flex flex-col justify-between p-6 sm:p-8 shadow-2xl animate-in slide-in-from-right duration-300">
-            <div className="space-y-6 flex-1 overflow-y-auto pr-1">
+        <div className="fixed inset-0 z-50 bg-black/60 flex justify-end">
+          <div className="bg-white w-full max-w-md h-full flex flex-col justify-between p-6 shadow-2xl">
+            <div className="space-y-6 flex-1 overflow-y-auto">
               <div className="flex items-center justify-between border-b border-[#E6E0D6] pb-4">
                 <div className="flex items-center gap-2">
                   <ShoppingBag className="w-5 h-5 text-[#E86F38]" />
-                  <h2 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Alışveriş Sepetiniz</h2>
+                  <h2 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">Sepetiniz</h2>
                 </div>
-                <button onClick={() => setIsCartOpen(false)} className="p-2 rounded-full bg-[#FAF7F2] hover:bg-[#E6E0D6]">
-                  <X className="w-5 h-5 text-[#1E1E1C]" />
+                <button onClick={() => setIsCartOpen(false)} className="p-2 rounded-full bg-[#FAF7F2]">
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-
               {cart.length === 0 ? (
                 <div className="py-20 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-[#FAF7F2] flex items-center justify-center mx-auto text-[#78756E]">
-                    <ShoppingBag className="w-8 h-8" />
-                  </div>
-                  <p className="text-sm font-medium text-[#78756E]">Sepetinizde henüz ürün bulunmuyor.</p>
-                  <button onClick={() => { setIsCartOpen(false); setActiveTab('store'); }} className="px-6 py-2.5 rounded-xl bg-[#1E1E1C] text-white text-xs font-bold">
-                    Koleksiyona Göz Atın
-                  </button>
+                  <p className="text-sm font-medium text-[#78756E]">Sepetinizde ürün bulunmuyor.</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {cart.map((item) => (
                     <div key={item.cartItemId} className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E6E0D6] flex items-center justify-between gap-4">
-                      <div className="space-y-1">
+                      <div>
                         <div className="text-sm font-bold text-[#1E1E1C]">{item.name}</div>
                         <div className="text-xs text-[#78756E]">{item.size} • {item.price} TL</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button onClick={() => updateCartQty(item.cartItemId, -1)} className="p-1 rounded-lg bg-white border border-[#E6E0D6]">
-                          <Minus className="w-3.5 h-3.5" />
-                        </button>
+                        <button onClick={() => updateCartQty(item.cartItemId, -1)} className="p-1 bg-white border border-[#E6E0D6]"><Minus className="w-3.5 h-3.5" /></button>
                         <span className="text-xs font-bold w-6 text-center">{item.qty}</span>
-                        <button onClick={() => updateCartQty(item.cartItemId, 1)} className="p-1 rounded-lg bg-white border border-[#E6E0D6]">
-                          <Plus className="w-3.5 h-3.5" />
-                        </button>
+                        <button onClick={() => updateCartQty(item.cartItemId, 1)} className="p-1 bg-white border border-[#E6E0D6]"><Plus className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
-
             {cart.length > 0 && (
               <div className="pt-6 border-t border-[#E6E0D6] space-y-4">
-                <div className="space-y-2 text-xs">
-                  <div className="flex justify-between text-[#78756E]">
-                    <span>Ara Toplam:</span>
-                    <span className="font-bold text-[#1E1E1C]">{cartSubtotal} TL</span>
-                  </div>
-                  <div className="flex justify-between text-[#78756E]">
-                    <span>Kargo:</span>
-                    <span className="font-bold text-[#4A7C59]">Ücretsiz Kargo</span>
-                  </div>
-                  <div className="flex justify-between text-sm font-bold text-[#1E1E1C] pt-2 border-t border-[#E6E0D6]">
-                    <span>Toplam Tutar:</span>
-                    <span className="text-[#E86F38] text-base">{cartTotal} TL</span>
-                  </div>
+                <div className="flex justify-between text-sm font-bold text-[#1E1E1C]">
+                  <span>Toplam:</span>
+                  <span className="text-[#E86F38] text-base">{cartTotal} TL</span>
                 </div>
-
-                <a
-                  href={SHOPIER_LINKS.store}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsCartOpen(false)}
-                  className="w-full py-3.5 rounded-2xl bg-[#4A7C59] hover:bg-[#3A6347] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
-                >
+                <a href={SHOPIER_LINKS.store} target="_blank" rel="noopener noreferrer" onClick={() => setIsCartOpen(false)} className="w-full py-3.5 rounded-2xl bg-[#4A7C59] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg">
                   <span>Shopier ile Güvenli Ödeme Yap</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
@@ -1109,92 +1512,17 @@ export default function App() {
         </div>
       )}
 
-      {/* ================= SHOPIER YÖNLENDİRME MODALI ================= */}
-      {shopierRedirectModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#E6E0D6] space-y-6 relative">
-            <button onClick={() => setShopierRedirectModal(null)} className="absolute top-5 right-5 p-2 rounded-full bg-[#FAF7F2] hover:bg-[#E6E0D6]">
-              <X className="w-5 h-5" />
-            </button>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#4A7C59]/10 text-[#4A7C59] flex items-center justify-center shrink-0">
-                <ExternalLink className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#4A7C59]">Shopier Güvenli Ödeme Yönlendirmesi</span>
-                <h3 className="font-serif-luxury text-2xl font-bold text-[#1E1E1C]">
-                  {shopierRedirectModal.product.name} ({shopierRedirectModal.size})
-                </h3>
-              </div>
-            </div>
-
-            <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E6E0D6] space-y-3 text-xs text-[#5A5751]">
-              <div className="flex items-center justify-between font-bold text-[#1E1E1C] text-sm pb-2 border-b border-[#E6E0D6]">
-                <span>Seçilen Boyut & Fiyat:</span>
-                <span className="text-[#4A7C59]">{shopierRedirectModal.size === '100ml' ? PRICE_100ML : PRICE_50ML} TL</span>
-              </div>
-              <p>Shopier&apos;e yönlendirildiğinizde sipariş notu olarak eklenmesini istediğiniz özel kod:</p>
-              <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-[#DED8CE]">
-                <code className="font-mono font-bold text-[#1E1E1C]">{shopierRedirectModal.product.code} - {shopierRedirectModal.size}</code>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(`${shopierRedirectModal.product.code} - ${shopierRedirectModal.size}`);
-                    setToastMessage('Sipariş kodu kopyalandı!');
-                    setTimeout(() => setToastMessage(null), 3000);
-                  }}
-                  className="px-3 py-1.5 rounded-lg bg-[#1E1E1C] text-white text-[11px] font-bold flex items-center gap-1"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>Kopyala</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <a
-                href={shopierRedirectModal.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setShopierRedirectModal(null)}
-                className="w-full py-3.5 rounded-2xl bg-[#4A7C59] hover:bg-[#3A6347] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
-              >
-                <span>Shopier Ödeme Sayfasına Git</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-              <a
-                href={SHOPIER_LINKS.store}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setShopierRedirectModal(null)}
-                className="w-full py-2.5 rounded-xl border border-[#DED8CE] hover:border-[#4A7C59] text-[#4A7C59] font-bold text-xs flex items-center justify-center gap-1.5"
-              >
-                <ShoppingBag className="w-3.5 h-3.5" />
-                <span>Shopier Mağaza Vitrini</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ================= FOOTER ================= */}
       <footer className="bg-[#F3EFE6] border-t border-[#E6E0D6] mt-16 py-10 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#78756E]">
           <div className="flex items-center gap-3">
             <FrestinBrandLogo size="sm" showText={true} />
-            <span className="hidden sm:inline text-[#DED8CE]">|</span>
             <div>© {new Date().getFullYear()} Frestin Perfume • Senin Kokun, Senin İmzan.</div>
           </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-[#C13584] hover:underline font-bold flex items-center gap-1">
-              <Instagram className="w-3.5 h-3.5" />
-              <span>@frestin_perfumes</span>
-            </a>
-            <a href={SHOPIER_LINKS.store} target="_blank" rel="noopener noreferrer" className="text-[#4A7C59] hover:underline font-bold flex items-center gap-1">
-              <span>Shopier Mağazamız</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
+          <a href={SHOPIER_LINKS.store} target="_blank" rel="noopener noreferrer" className="text-[#4A7C59] font-bold flex items-center gap-1">
+            <span>Shopier Mağazamız</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
         </div>
       </footer>
     </div>
